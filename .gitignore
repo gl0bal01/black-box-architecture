@@ -1,0 +1,72 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Linux
+*~
+.directory
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Claude Code
+.claude/
+!.claude/commands/
+
+# Node.js (for any examples)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python (for any examples)
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv
+.pytest_cache/
+
+# Go (for any examples)
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Rust (for any examples)
+target/
+Cargo.lock
+
+# Build outputs
+dist/
+build/
+*.o
+*.a
+
+# OS generated files
+.Spotlight-V100
+.Trashes
