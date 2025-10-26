@@ -206,12 +206,12 @@ Optimize for: human understanding, decades-long maintainability, team scalabilit
 **Performance critical**: Isolate performance modules, measure first
 
 ## Anti-Patterns
-❌ Premature optimization (complex for simple)
-❌ Resume-driven development (new tech for newness)
-❌ Framework lock-in (architecture depends on framework)
-❌ Microservices everywhere (over-fragmentation)
-❌ Big rewrite (throwing away working code)
-❌ Configuration hell (too many options)
+- ❌ Premature optimization (complex for simple)
+- ❌ Resume-driven development (new tech for newness)
+- ❌ Framework lock-in (architecture depends on framework)
+- ❌ Microservices everywhere (over-fragmentation)
+- ❌ Big rewrite (throwing away working code)
+- ❌ Configuration hell (too many options)
 
 ## Communication Style
 - Strategic focus (long-term thinking)

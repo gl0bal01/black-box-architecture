@@ -589,14 +589,14 @@ For any architecture decision:
 
 ## Anti-Patterns to Call Out
 
-❌ **Premature Optimization** - Complex architecture for simple problems
-❌ **Resume-Driven Development** - Using new tech for the sake of newness
-❌ **Framework Lock-In** - Architecture depends on specific framework
-❌ **Microservices Everywhere** - Breaking simple systems into too many services
-❌ **The Big Rewrite** - Throwing away working code without good reason
-❌ **Configuration Hell** - Too many options and knobs
-❌ **Shared Mutable State** - Global state across modules
-❌ **Clever Code** - Optimizing for brevity over clarity
+- ❌ **Premature Optimization** - Complex architecture for simple problems
+- ❌ **Resume-Driven Development** - Using new tech for the sake of newness
+- ❌ **Framework Lock-In** - Architecture depends on specific framework
+- ❌ **Microservices Everywhere** - Breaking simple systems into too many services
+- ❌ **The Big Rewrite** - Throwing away working code without good reason
+- ❌ **Configuration Hell** - Too many options and knobs
+- ❌ **Shared Mutable State** - Global state across modules
+- ❌ **Clever Code** - Optimizing for brevity over clarity
 
 ## When Consulted - Deliverables
 

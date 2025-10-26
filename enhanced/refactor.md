@@ -410,6 +410,149 @@ impl<S: Storage> ConfigManager<S> {
 }
 ```
 
+### Example 5: C Black Box (Eskil's Approach)
+
+**Before (Exposed Structure)**:
+```c
+// user.h - Exposes implementation
+typedef struct {
+    char name[256];
+    char email[256];
+    int age;
+} User;
+
+void user_create(User* user, const char* name);
+```
+
+**After (Black Box with Opaque Types)**:
+```c
+// user.h - Black box interface
+typedef struct User User;  // Forward declaration only
+
+// Public API
+User* user_create(const char* name, const char* email);
+void user_destroy(User* user);
+const char* user_get_name(User* user);
+void user_set_age(User* user, int age);
+```
+
+```c
+// user.c - Implementation hidden
+struct User {
+    char* name;
+    char* email;
+    int age;
+};
+
+User* user_create(const char* name, const char* email) {
+    User* user = malloc(sizeof(User));
+    user->name = strdup(name);
+    user->email = strdup(email);
+    user->age = 0;
+    return user;
+}
+
+void user_destroy(User* user) {
+    free(user->name);
+    free(user->email);
+    free(user);
+}
+```
+
+**Benefits**:
+- Can change internal structure without breaking code
+- Prevents direct field access
+- True encapsulation in C
+
+### Example 6: PHP Black Box
+
+**Before (Fat Controller)**:
+```php
+<?php
+class UserController {
+    public function register() {
+        // Validation, business logic, DB, email all mixed
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            throw new Exception('Invalid email');
+        }
+
+        $pdo = new PDO('mysql:host=localhost;dbname=mydb', 'user', 'pass');
+        $stmt = $pdo->prepare('INSERT INTO users (email, password) VALUES (?, ?)');
+        $stmt->execute([$_POST['email'], password_hash($_POST['password'], PASSWORD_BCRYPT)]);
+
+        mail($_POST['email'], 'Welcome', 'Thanks for registering!');
+    }
+}
+```
+
+**After (Black Box Service Layer)**:
+```php
+<?php
+// Black box interfaces
+interface UserRepositoryInterface {
+    public function save(array $data): int;
+    public function findByEmail(string $email): ?array;
+}
+
+interface EmailServiceInterface {
+    public function send(string $to, string $subject, string $body): void;
+}
+
+// Service encapsulates business logic
+class UserRegistrationService {
+    private UserRepositoryInterface $userRepo;
+    private EmailServiceInterface $emailService;
+
+    public function __construct(
+        UserRepositoryInterface $userRepo,
+        EmailServiceInterface $emailService
+    ) {
+        $this->userRepo = $userRepo;
+        $this->emailService = $emailService;
+    }
+
+    public function register(array $data): array {
+        // Validate
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return ['success' => false, 'errors' => ['email' => 'Invalid email']];
+        }
+
+        // Check if exists
+        if ($this->userRepo->findByEmail($data['email'])) {
+            return ['success' => false, 'errors' => ['email' => 'Email exists']];
+        }
+
+        // Save user
+        $userId = $this->userRepo->save($data);
+
+        // Send welcome email
+        $this->emailService->send($data['email'], 'Welcome!', 'Thanks!');
+
+        return ['success' => true, 'user_id' => $userId];
+    }
+}
+
+// Thin controller
+class UserController {
+    private UserRegistrationService $registrationService;
+
+    public function __construct(UserRegistrationService $service) {
+        $this->registrationService = $service;
+    }
+
+    public function register() {
+        $result = $this->registrationService->register($_POST);
+        echo json_encode($result);
+    }
+}
+```
+
+**Benefits**:
+- Easy to test with mocks
+- Reusable business logic
+- Thin controllers
+- Swappable dependencies
+
 ## When Analyzing Code - Key Questions
 
 Always ask yourself:
@@ -470,14 +613,14 @@ When refactoring existing code:
 
 ## Anti-Patterns to Avoid
 
-❌ **Over-abstraction** - Creating unnecessary layers for simple code
-❌ **Premature optimization** - Complex designs for simple problems
-❌ **Breaking working code** - Refactoring without tests
-❌ **Ignoring existing patterns** - Fighting the codebase's natural structure
-❌ **Big-bang rewrites** - Trying to refactor everything at once
-❌ **Interface pollution** - Exposing too many public methods
-❌ **Leaky abstractions** - Interfaces that reveal implementation details
-❌ **God modules** - Modules that do everything
+- ❌ **Over-abstraction** - Creating unnecessary layers for simple code
+- ❌ **Premature optimization** - Complex designs for simple problems
+- ❌ **Breaking working code** - Refactoring without tests
+- ❌ **Ignoring existing patterns** - Fighting the codebase's natural structure
+- ❌ **Big-bang rewrites** - Trying to refactor everything at once
+- ❌ **Interface pollution** - Exposing too many public methods
+- ❌ **Leaky abstractions** - Interfaces that reveal implementation details
+- ❌ **God modules** - Modules that do everything
 
 ## Red Flags to Avoid
 

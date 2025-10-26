@@ -235,8 +235,142 @@ impl<S: Storage> ConfigManager<S> {
 
 ---
 
+### C: Opaque Types (Eskil's Approach)
+
+**Before (Exposed Structure)**:
+```c
+// user.h - Exposes implementation
+typedef struct {
+    char name[256];
+    char email[256];
+    int age;
+} User;
+
+void user_create(User* user, const char* name);
+```
+
+**After (Opaque Type)**:
+```c
+// user.h - Black box interface
+typedef struct User User;  // Forward declaration only
+
+// Public API
+User* user_create(const char* name, const char* email);
+void user_destroy(User* user);
+const char* user_get_name(User* user);
+void user_set_age(User* user, int age);
+```
+
+```c
+// user.c - Implementation hidden
+struct User {
+    char* name;
+    char* email;
+    int age;
+};
+
+User* user_create(const char* name, const char* email) {
+    User* user = malloc(sizeof(User));
+    user->name = strdup(name);
+    user->email = strdup(email);
+    user->age = 0;
+    return user;
+}
+
+void user_destroy(User* user) {
+    free(user->name);
+    free(user->email);
+    free(user);
+}
+```
+
+**Benefits**:
+- ✅ Can change internal structure without breaking code
+- ✅ Prevents direct field access
+- ✅ True encapsulation in C
+
+---
+
+### PHP: Service Layer Pattern
+
+**Before (Fat Controller)**:
+```php
+<?php
+class UserController {
+    public function register() {
+        // Validation, business logic, DB, email all mixed
+        if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+            throw new Exception('Invalid email');
+        }
+
+        $pdo = new PDO('mysql:host=localhost;dbname=mydb', 'user', 'pass');
+        $stmt = $pdo->prepare('INSERT INTO users (email, password) VALUES (?, ?)');
+        $stmt->execute([$_POST['email'], password_hash($_POST['password'], PASSWORD_BCRYPT)]);
+
+        mail($_POST['email'], 'Welcome', 'Thanks for registering!');
+    }
+}
+```
+
+**After (Black Box Service Layer)**:
+```php
+<?php
+// Service encapsulates business logic
+class UserRegistrationService {
+    private UserRepositoryInterface $userRepo;
+    private EmailServiceInterface $emailService;
+
+    public function __construct(
+        UserRepositoryInterface $userRepo,
+        EmailServiceInterface $emailService
+    ) {
+        $this->userRepo = $userRepo;
+        $this->emailService = $emailService;
+    }
+
+    public function register(array $data): array {
+        // Validate
+        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+            return ['success' => false, 'errors' => ['email' => 'Invalid email']];
+        }
+
+        // Save user
+        $userId = $this->userRepo->save($data);
+
+        // Send welcome email
+        $this->emailService->send($data['email'], 'Welcome!', 'Thanks!');
+
+        return ['success' => true, 'user_id' => $userId];
+    }
+}
+
+// Thin controller
+class UserController {
+    private UserRegistrationService $registrationService;
+
+    public function __construct(UserRegistrationService $service) {
+        $this->registrationService = $service;
+    }
+
+    public function register() {
+        $result = $this->registrationService->register($_POST);
+        echo json_encode($result);
+    }
+}
+```
+
+**Benefits**:
+- ✅ Easy to test with mocks
+- ✅ Reusable business logic
+- ✅ Thin controllers
+- ✅ Swappable dependencies
+
+---
+
 For complete, runnable examples, see:
-- [Python Examples](../examples/python/)
-- [TypeScript Examples](../examples/typescript/)
-- [Go Examples](../examples/go/)
-- [Rust Examples](../examples/rust/)
+- [Python Examples](../examples/python/) - Repository pattern, service abstractions
+- [TypeScript Examples](../examples/typescript/) - Interface-driven design, DI
+- [Go Examples](../examples/go/) - Interface composition, struct patterns
+- [Rust Examples](../examples/rust/) - Trait-based black boxes
+- [C Examples](../examples/c/) - Opaque types, function pointers (Eskil's approach!)
+- [PHP Examples](../examples/php/) - Service layer, strategy pattern, Laravel integration

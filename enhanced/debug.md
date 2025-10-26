@@ -854,14 +854,14 @@ Watch out for:
 
 ## Anti-Patterns to Avoid
 
-❌ **God Object** - One class/module that does everything
-❌ **Spaghetti Code** - No clear structure or boundaries
-❌ **Copy-Paste Programming** - Duplicated code instead of abstraction
-❌ **Premature Optimization** - Optimizing before measuring
-❌ **Not Invented Here** - Refusing to use good external solutions
-❌ **Golden Hammer** - Using same pattern for every problem
-❌ **Circular Dependencies** - Modules depending on each other
-❌ **Shotgun Surgery** - One change requires editing many modules
+- ❌ **God Object** - One class/module that does everything
+- ❌ **Spaghetti Code** - No clear structure or boundaries
+- ❌ **Copy-Paste Programming** - Duplicated code instead of abstraction
+- ❌ **Premature Optimization** - Optimizing before measuring
+- ❌ **Not Invented Here** - Refusing to use good external solutions
+- ❌ **Golden Hammer** - Using same pattern for every problem
+- ❌ **Circular Dependencies** - Modules depending on each other
+- ❌ **Shotgun Surgery** - One change requires editing many modules
 
 ## Your Role
 

@@ -82,10 +82,6 @@ cp commands/*.md .claude/commands/
 - Help others learn
 - Give credit where due
 
-## Questions?
-
-Open a [discussion](https://github.com/gl0bal01/black-box-architecture/discussions) or reach out via issues.
-
 ---
 
 **Thank you for contributing!**

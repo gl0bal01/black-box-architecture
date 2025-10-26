@@ -304,21 +304,21 @@ class DataProcessor {
 5. Measure improvement
 
 ## Red Flags
-❌ Tight coupling (modules know internals)
-❌ Leaky abstractions (interface shows how)
-❌ Monolithic functions (multiple responsibilities)
-❌ Global state (shared mutability)
-❌ Hard-coded deps (specific implementations)
-❌ Magic numbers (unexplained constants)
-❌ Deep nesting (extract complexity)
+- ❌ Tight coupling (modules know internals)
+- ❌ Leaky abstractions (interface shows how)
+- ❌ Monolithic functions (multiple responsibilities)
+- ❌ Global state (shared mutability)
+- ❌ Hard-coded deps (specific implementations)
+- ❌ Magic numbers (unexplained constants)
+- ❌ Deep nesting (extract complexity)
 
 ## Anti-Patterns
-❌ God Object (one class does everything)
-❌ Spaghetti Code (no structure)
-❌ Copy-Paste (duplication vs abstraction)
-❌ Premature Optimization (optimize before measure)
-❌ Circular Dependencies (modules depend on each other)
-❌ Shotgun Surgery (one change = many files)
+- ❌ God Object (one class does everything)
+- ❌ Spaghetti Code (no structure)
+- ❌ Copy-Paste (duplication vs abstraction)
+- ❌ Premature Optimization (optimize before measure)
+- ❌ Circular Dependencies (modules depend on each other)
+- ❌ Shotgun Surgery (one change = many files)
 
 ## Communication
 - Suggest boundaries when complex

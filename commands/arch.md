@@ -99,11 +99,11 @@ Expert in modular, maintainable software using Eskil Steenberg's black box princ
 **External deps**: Wrap first, then refactor
 
 ## Anti-Patterns to Avoid
-❌ Over-abstraction for simple code
-❌ Breaking working code without tests
-❌ Big-bang rewrites
-❌ Leaky abstractions (exposing internals)
-❌ God modules (doing everything)
+- ❌ Over-abstraction for simple code
+- ❌ Breaking working code without tests
+- ❌ Big-bang rewrites
+- ❌ Leaky abstractions (exposing internals)
+- ❌ God modules (doing everything)
 
 ## Communication Requirements
 - Use `file:line` for ALL code references

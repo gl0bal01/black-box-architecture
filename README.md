@@ -1,9 +1,9 @@
 # Black Box Architecture
 
-> Transform any codebase into modular, maintainable "black boxes" using Eskil Steenberg's legendary architecture principles.
+> Transform any codebase into modular, maintainable "black boxes" using Eskil Steenberg's architecture principles.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](docs/CONTRIBUTING.md)
 
 AI prompts optimized for **Claude Code**, **Claude** that teach your AI assistant to think in terms of replaceable, modular components.
 
@@ -66,7 +66,7 @@ These prompts optimize for:
 - ✅ **Structured 4-phase workflow** (Discovery → Analysis → Design → Implementation)
 - ✅ **Mandatory output templates** (consistent, parseable responses)
 - ✅ **Quality validation checklists** (explicit success criteria)
-- ✅ **Multi-language support** (Python, TypeScript, Go, Rust, Java)
+- ✅ **Multi-language support** (Python, TypeScript, Go, Rust, C, PHP)
 - ✅ **Token-optimized** (compact but comprehensive)
 - ✅ **Tool integration** (Glob, Grep, Read, Edit for Claude Code)
 
@@ -113,10 +113,12 @@ These prompts optimize for:
 ## 🔍 Real-World Examples
 
 See the [`examples/`](examples/) directory for complete before/after refactoring examples in:
-- **Python** - Class-based and functional patterns
-- **TypeScript** - React components and APIs
-- **Go** - Interface-driven design
-- **Rust** - Trait-based black boxes
+- **Python** - Repository pattern, service abstractions
+- **TypeScript** - Interface-driven design, dependency injection
+- **Go** - Interface composition, struct patterns
+- **Rust** - Trait-based black boxes, generic implementations
+- **C** - Opaque types, function pointers (Eskil's approach!)
+- **PHP** - Service layer, strategy pattern, Laravel integration
 
 ## 🎓 Learn More
 

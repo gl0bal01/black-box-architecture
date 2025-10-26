@@ -1,6 +1,6 @@
 # Black Box Architecture Principles
 
-This document explains the core principles from Eskil Steenberg's legendary [lecture on architecting large software projects](https://www.youtube.com/watch?v=sSpULGNHyoI).
+This document explains the core principles from Eskil Steenberg's [lecture on architecting large software projects](https://www.youtube.com/watch?v=sSpULGNHyoI).
 
 ## The Core Philosophy
 
