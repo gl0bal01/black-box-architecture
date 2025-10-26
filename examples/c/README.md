@@ -2,12 +2,6 @@
 
 Black box architecture in C using function pointers and opaque types - the foundation of Eskil Steenberg's approach.
 
-## Examples
-
-- [Opaque Types](opaque-types/) - Hiding implementation details
-- [Function Pointers](function-pointers/) - Interface-like behavior
-- [Module Pattern](module-pattern/) - Encapsulation in C
-
 ## Key Patterns
 
 ### 1. Opaque Pointers (Information Hiding)

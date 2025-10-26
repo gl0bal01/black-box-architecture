@@ -2,12 +2,6 @@
 
 Trait-based architecture for modular, safe Rust code.
 
-## Examples
-
-- [Trait Objects](trait-objects/) - Dynamic dispatch for replaceability
-- [Generic Traits](generic-traits/) - Static dispatch with generics
-- [Plugin System](plugin-system/) - Loadable modules
-
 ## Key Patterns
 
 ### 1. Traits as Interfaces

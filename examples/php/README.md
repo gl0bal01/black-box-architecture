@@ -2,12 +2,6 @@
 
 Black box architecture patterns in PHP using interfaces, dependency injection, and design patterns.
 
-## Examples
-
-- [Repository Pattern](repository-pattern/) - Separating data access from business logic
-- [Service Layer](service-layer/) - Encapsulating business logic
-- [Dependency Injection](dependency-injection/) - Decoupling dependencies
-
 ## Key Patterns
 
 ### 1. Interface-Based Design
