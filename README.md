@@ -21,11 +21,18 @@ Three specialized AI prompts that apply [Eskil Steenberg's](https://www.youtube.
 ### Option 1: As a Claude Skill (Recommended)
 
 ```bash
-# Install the skill (if Claude skill system is available)
-claude skill install black-box-architecture
+# Clone the repository
+git clone https://github.com/gl0bal01/black-box-architecture.git
 
-# Use in any project
-# The AI will automatically apply black box principles
+# For personal use (available in all projects)
+mkdir -p ~/.claude/skills
+cp -r black-box-architecture/skills ~/.claude/skills/black-box-architecture
+
+# OR for project-specific use (shared with team via git)
+mkdir -p .claude/skills
+cp -r black-box-architecture/skills .claude/skills/black-box-architecture
+
+# Claude will automatically discover and use the skill when relevant
 ```
 
 ### Option 2: As Slash Commands

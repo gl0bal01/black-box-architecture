@@ -24,7 +24,7 @@ This directory contains the **comprehensive, detailed** versions of the black bo
 - ✅ Doing one-time deep architectural analysis
 - ✅ Need extensive before/after examples
 
-### Use Compact (in `../commands/` and `../skill/`) when:
+### Use Compact (in `../commands/` and `../skills/`) when:
 - ✅ Creating slash commands
 - ✅ Frequent usage
 - ✅ Token efficiency is critical
@@ -35,7 +35,7 @@ This directory contains the **comprehensive, detailed** versions of the black bo
 
 | Version | Files | Total Size | Token Count | Best For |
 |---------|-------|------------|-------------|----------|
-| **Compact** | `../commands/`, `../skill/` | ~18 KB | ~3,300 tokens | Commands, daily use |
+| **Compact** | `../commands/`, `../skills/` | ~18 KB | ~3,300 tokens | Commands, daily use |
 | **Enhanced** | This directory | ~63 KB | ~12,000 tokens | Reference, learning |
 
 **Enhanced is ~3.5x larger** but provides:
@@ -164,7 +164,7 @@ When doing major refactoring or architecture work, paste an enhanced prompt for:
 ## 🔗 See Also
 
 - [Compact versions](../commands/) - Token-optimized for commands
-- [Skill package](../skill/) - Claude skill installation
+- [Skill package](../skills/) - Claude skill installation
 - [Main README](../README.md) - Repository overview
 - [VERSIONS.md](VERSIONS.md) - Version comparison guide
 

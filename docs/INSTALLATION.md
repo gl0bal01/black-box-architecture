@@ -16,28 +16,44 @@ This guide covers how to install and use the Black Box Architecture prompts in y
 ### Prerequisites
 
 - Claude Code CLI installed
-- Access to Claude skill system (if available)
 
 ### Installation
 
-```bash
-# Install the skill globally
-claude skill install black-box-architecture
+Skills in Claude Code are discovered automatically from the `~/.claude/skills/` directory (personal) or `.claude/skills/` directory (project-specific). There is no "install" command.
 
-# Verify installation
-claude skill list
+```bash
+# Clone the repository
+git clone https://github.com/gl0bal01/black-box-architecture.git
+
+# For personal use (available in all your projects)
+mkdir -p ~/.claude/skills
+cp -r black-box-architecture/skills ~/.claude/skills/black-box-architecture
+
+# OR for project-specific use (shared with team via git)
+mkdir -p .claude/skills
+cp -r black-box-architecture/skills .claude/skills/black-box-architecture
+```
+
+### Verification
+
+```bash
+# In Claude Code, ask what skills are available
+claude
+> "What skills are available?"
+
+# Or simply start using it
+> "Refactor this UserService using black box principles"
 ```
 
 ### Usage
 
-Once installed, the skill is available in all your projects:
+Once copied to the skills directory, the skill is automatically available:
 
 ```bash
 # Start Claude Code in any project
 cd your-project/
 
-# Use natural language to invoke
-# Claude will automatically use the black box architecture methodology
+# Use natural language - Claude will automatically use the skill when relevant
 ```
 
 **Example prompts:**
@@ -125,7 +141,7 @@ If you prefer not to install as a skill or command, you can use the prompts manu
 
 ### Usage
 
-1. **Copy the appropriate prompt** from the `skill/` directory:
+1. **Copy the appropriate prompt** from the `skills/` directory:
    - `refactor.md` - For code refactoring
    - `plan.md` - For architecture planning
    - `debug.md` - For debugging
@@ -155,11 +171,14 @@ npx repomix --include "src/**/*.ts" --output context.xml
 ### Verify Skill Installation
 
 ```bash
-# Check if skill is installed
-claude skill list | grep black-box-architecture
+# Check if skill directory exists
+ls -la ~/.claude/skills/black-box-architecture
+# OR for project-specific
+ls -la .claude/skills/black-box-architecture
 
-# Test the skill
+# Test the skill in Claude Code
 claude
+> "What skills are available?"
 > "Can you explain the black box architecture principles you know?"
 ```
 
@@ -201,14 +220,16 @@ head -n 5 .claude/commands/arch.md
 
 ## Troubleshooting
 
-### Skill Not Found
+### Skill Not Discovered
 
-**Problem**: `claude skill install black-box-architecture` returns "Skill not found"
+**Problem**: Claude doesn't seem to use the skill
 
 **Solutions**:
-1. Check if Claude skill system is available in your version
-2. Try manual installation via slash commands instead
-3. Verify network connection for skill registry
+1. Verify the skill directory exists: `ls ~/.claude/skills/black-box-architecture`
+2. Check that the skill files are present (refactor.md, plan.md, debug.md, skill.json)
+3. Restart Claude Code
+4. Try asking explicitly: "What skills are available?"
+5. Try manual installation via slash commands instead
 
 ### Commands Not Showing Up
 
@@ -246,12 +267,14 @@ head -n 5 .claude/commands/arch.md
 ### Update Skill
 
 ```bash
-# Update to latest version
-claude skill update black-box-architecture
+# Pull latest changes
+cd /path/to/black-box-architecture
+git pull
 
-# Or reinstall
-claude skill uninstall black-box-architecture
-claude skill install black-box-architecture
+# Copy to skills directory (overwrites existing)
+cp -r skills ~/.claude/skills/black-box-architecture
+# OR for project-specific
+cp -r skills .claude/skills/black-box-architecture
 ```
 
 ### Update Commands
@@ -271,7 +294,11 @@ curl -o .claude/commands/arch-debug.md https://raw.githubusercontent.com/gl0bal0
 ### Uninstall Skill
 
 ```bash
-claude skill uninstall black-box-architecture
+# Remove from personal skills
+rm -rf ~/.claude/skills/black-box-architecture
+
+# OR remove from project skills
+rm -rf .claude/skills/black-box-architecture
 ```
 
 ### Uninstall Commands

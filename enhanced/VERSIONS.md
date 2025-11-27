@@ -6,12 +6,12 @@ This repository contains **9 prompt files** across **2 versions** (Compact and E
 
 | Your Need | Recommended Version |
 |-----------|-------------------|
-| **Creating Claude Code slash commands** | ⭐ **Compact** (`commands/` or `skill/`) |
-| **Frequent usage, token efficiency matters** | ⭐ **Compact** (`commands/` or `skill/`) |
+| **Creating Claude Code slash commands** | ⭐ **Compact** (`commands/` or `skills/`) |
+| **Frequent usage, token efficiency matters** | ⭐ **Compact** (`commands/` or `skills/`) |
 | **Reference documentation** | **Enhanced** (`enhanced/`) |
 | **Learning the methodology** | **Enhanced** (`enhanced/`) |
 | **Deep examples and explanations** | **Enhanced** (`enhanced/`) |
-| **Daily production work** | ⭐ **Compact** (`commands/` or `skill/`) |
+| **Daily production work** | ⭐ **Compact** (`commands/` or `skills/`) |
 
 ## All Versions
 
@@ -66,9 +66,9 @@ This repository contains **9 prompt files** across **2 versions** (Compact and E
 
 | File | Words | Tokens (est.) | Use Case |
 |------|-------|---------------|----------|
-| `commands/arch.md` or `skill/refactor.md` | 565 | ~750 | Development command |
-| `commands/arch-plan.md` or `skill/plan.md` | 854 | ~1,140 | Planning command |
-| `commands/arch-debug.md` or `skill/debug.md` | 1,086 | ~1,450 | Debugging command |
+| `commands/arch.md` or `skills/refactor.md` | 565 | ~750 | Development command |
+| `commands/arch-plan.md` or `skills/plan.md` | 854 | ~1,140 | Planning command |
+| `commands/arch-debug.md` or `skills/debug.md` | 1,086 | ~1,450 | Debugging command |
 
 **Strengths**:
 - ✅ Structured 4-phase protocol (same as Enhanced)
@@ -128,7 +128,7 @@ Legend: ✅ Yes | ❌ No | ⚠️ Partial
 
 ### For Individual Developers
 
-1. **Create commands** using Compact versions (`commands/` or `skill/`)
+1. **Create commands** using Compact versions (`commands/` or `skills/`)
 2. **Reference** Enhanced versions (`enhanced/`) when needed
 3. **Daily work**: Use Compact for production development
 
@@ -141,7 +141,7 @@ Legend: ✅ Yes | ❌ No | ⚠️ Partial
 ### For Learning
 
 1. **Start with** Enhanced (`enhanced/`) to understand principles deeply
-2. **Practice with** Compact (`commands/` or `skill/`) in real projects
+2. **Practice with** Compact (`commands/` or `skills/`) in real projects
 3. **Reference back** to Enhanced when encountering complex scenarios
 
 ## Installation Examples
@@ -189,11 +189,12 @@ black-box-architecture/
 │   ├── arch.md                         (Refactoring command)
 │   ├── arch-plan.md                    (Planning command)
 │   └── arch-debug.md                   (Debugging command)
-├── skill/                              (Compact - for Claude skill) ⭐
+├── skills/                             (Compact - for Claude skill) ⭐
 │   ├── refactor.md                     (Refactoring)
 │   ├── plan.md                         (Planning)
 │   ├── debug.md                        (Debugging)
-│   └── skill.json                      (Skill metadata)
+│   ├── skill.json                      (Skill metadata)
+│   └── SKILL.md                        (Skill definition)
 ├── enhanced/                           (Comprehensive reference)
 │   ├── refactor.md                     (Enhanced refactoring guide)
 │   ├── plan.md                         (Enhanced planning guide)
@@ -220,7 +221,7 @@ black-box-architecture/
 ## When to Use Each Prompt
 
 ### Refactoring Prompts
-**Files**: `commands/arch.md`, `skill/refactor.md` (compact), `enhanced/refactor.md` (detailed)
+**Files**: `commands/arch.md`, `skills/refactor.md` (compact), `enhanced/refactor.md` (detailed)
 **For**: Hands-on development, refactoring, code improvement
 **Use when**:
 - Breaking apart monolithic code
@@ -229,7 +230,7 @@ black-box-architecture/
 - Working in Claude Code environment
 
 ### Planning Prompts
-**Files**: `commands/arch-plan.md`, `skill/plan.md` (compact), `enhanced/plan.md` (detailed)
+**Files**: `commands/arch-plan.md`, `skills/plan.md` (compact), `enhanced/plan.md` (detailed)
 **For**: Strategic architecture, system design, planning
 **Use when**:
 - Designing new systems
@@ -238,7 +239,7 @@ black-box-architecture/
 - Creating technical specifications
 
 ### Debugging Prompts
-**Files**: `commands/arch-debug.md`, `skill/debug.md` (compact), `enhanced/debug.md` (detailed)
+**Files**: `commands/arch-debug.md`, `skills/debug.md` (compact), `enhanced/debug.md` (detailed)
 **For**: Development, debugging, testing
 **Use when**:
 - Building new features
@@ -253,13 +254,13 @@ black-box-architecture/
    → Read one Enhanced prompt (enhanced/), then use Compact daily
 
 2. Want to create slash commands?
-   → Use Compact versions (commands/ or skill/)
+   → Use Compact versions (commands/ or skills/)
 
 3. Need comprehensive examples?
    → Reference Enhanced versions (enhanced/)
 
 4. Daily development work?
-   → Always use Compact versions (commands/ or skill/) ⭐
+   → Always use Compact versions (commands/ or skills/) ⭐
 ```
 
 ## Support & Updates
