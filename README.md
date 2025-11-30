@@ -7,6 +7,25 @@
 
 AI prompts optimized for **Claude Code**, **Claude** that teach your AI assistant to think in terms of replaceable, modular components.
 
+## 📑 Table of Contents
+
+- [What This Is](#-what-this-is)
+- [Quick Start](#-quick-start)
+  - [Option 1: Skills (Recommended)](#option-1-as-a-claude-skill-recommended)
+  - [Option 2: Commands](#option-2-as-slash-commands)
+  - [Option 3: Agents (Advanced)](#option-3-as-autonomous-agents-advanced)
+- [Core Philosophy](#-core-philosophy)
+- [What's Included](#-whats-included)
+- [Skills vs Commands vs Agents](#-skills-vs-commands-vs-agents)
+- [Autonomous Agents](#-autonomous-agents-advanced)
+- [Example Usage](#-example-usage)
+- [Documentation](#-documentation)
+- [Real-World Examples](#-real-world-examples)
+- [Learn More](#-learn-more)
+- [How It Works](#-how-it-works)
+- [Contributing](#-contributing)
+- [Next Steps](#-next-steps)
+
 ## 🎯 What This Is
 
 Three specialized AI prompts that apply [Eskil Steenberg's](https://www.youtube.com/watch?v=sSpULGNHyoI) battle-tested principles:
@@ -47,6 +66,19 @@ cp -r commands/ .claude/commands/
 # /arch-debug - Debug with modular isolation
 ```
 
+### Option 3: As Autonomous Agents (Advanced)
+
+```bash
+# Copy agents for complex architectural workflows
+cp -r agents/ .claude/agents/
+
+# Agents autonomously handle:
+# - Multi-step analysis and refactoring
+# - Strategic architecture design
+# - Complex debugging with module isolation
+# - Coordinated workflows across multiple specialists
+```
+
 ## 💡 Core Philosophy
 
 **"It's faster to write 5 lines of code today than to write 1 line today and then have to edit it in the future."**
@@ -76,6 +108,87 @@ These prompts optimize for:
 - ✅ **Multi-language support** (Python, TypeScript, Go, Rust, C, PHP)
 - ✅ **Token-optimized** (compact but comprehensive)
 - ✅ **Tool integration** (Glob, Grep, Read, Edit for Claude Code)
+
+## 🎨 Skills vs Commands vs Agents
+
+Understanding the three ways to use black box architecture principles:
+
+| Aspect | Skills | Commands | Agents |
+|--------|--------|----------|--------|
+| **Activation** | Auto-discovered by Claude | Manual `/command` | Delegated by orchestrator |
+| **Use Case** | Passive expertise | Quick templates | Complex autonomous tasks |
+| **Context** | Shared | Shared | Separate (isolated) |
+| **Best For** | Background knowledge | Direct control | Multi-step workflows |
+
+**Skills** ([Learn more](skills/SKILL.md)):
+- Claude automatically discovers when relevant
+- Three variants: refactor, plan, debug
+- Provides expertise without explicit invocation
+
+**Commands** ([Learn more](docs/USAGE.md)):
+- User explicitly triggers with `/arch`, `/arch-plan`, `/arch-debug`
+- Full control over execution
+- Template-based responses
+
+**Agents** ([Learn more](docs/AGENTS.md)):
+- Autonomous specialists that coordinate together
+- Handle complex, multi-step tasks
+- Separate context windows prevent pollution
+
+## 🤖 Autonomous Agents (Advanced)
+
+For complex, multi-step architectural work, use the **specialized agent system**:
+
+### Installation
+
+```bash
+# Copy agents to your project
+cp -r agents/ .claude/agents/
+
+# The orchestrator coordinates all agents automatically
+```
+
+### Agent Architecture
+
+The agent system follows black box principles itself - specialized agents with clear responsibilities:
+
+| Agent | Role | Autonomous Actions |
+|-------|------|-------------------|
+| **arch-orchestrator** | Coordination | Analyzes requests, delegates to specialists, assembles results |
+| **arch-analyzer** | Analysis | Explores codebases, identifies violations, maps dependencies |
+| **arch-planner** | Design | Designs architectures, creates roadmaps, assesses risks |
+| **arch-implementer** | Implementation | Refactors code, maintains boundaries, verifies changes |
+| **arch-debugger** | Debugging | Isolates bugs to modules, proposes fixes, maintains integrity |
+
+### Workflows
+
+**Analysis Only**: arch-analyzer explores codebase and reports findings
+
+**Planning Only**: arch-planner designs architecture from requirements
+
+**Full Refactoring**: arch-analyzer → arch-planner → [USER APPROVAL] → arch-implementer
+
+**Debug & Fix**: arch-debugger → arch-implementer (if fix needed)
+
+**Complete Transformation**: All agents work together for major architectural overhaul
+
+### Why Agents?
+
+- **Commands**: Manual triggers for templates (user control)
+- **Skills**: Passive knowledge Claude auto-discovers (expertise)
+- **Agents**: Active specialists that autonomously execute complex tasks (delegation)
+
+Agents provide:
+- **Autonomous execution** - Multi-step workflows without constant guidance
+- **Context isolation** - Separate context windows prevent pollution
+- **Specialized reasoning** - Each agent is expert in its domain
+- **Composability** - Agents coordinate through well-defined interfaces
+
+**Learn More:**
+- 📖 [Complete Agent Documentation](docs/AGENTS.md) - Detailed guide for each agent
+- 🔄 [Agent Workflows](docs/WORKFLOWS.md) - Step-by-step examples
+- 🔗 [Integration Examples](docs/INTEGRATION_EXAMPLES.md) - How agents coordinate
+- ⚙️ [Agent Specifications](agents/agent.json) - Technical specifications
 
 ## 🎬 Example Usage
 
@@ -111,11 +224,23 @@ These prompts optimize for:
 
 ## 📚 Documentation
 
-- [Installation Guide](docs/INSTALLATION.md) - Detailed setup for skills and commands
-- [Usage Guide](docs/USAGE.md) - Workflows and examples
-- [Principles Guide](docs/PRINCIPLES.md) - Eskil's methodology explained
-- [Code Examples](docs/EXAMPLES.md) - Before/after transformations
-- [Contributing](docs/CONTRIBUTING.md) - How to contribute
+### Getting Started
+- **[Installation Guide](docs/INSTALLATION.md)** - Detailed setup for skills, commands, and agents
+- **[Principles Guide](docs/PRINCIPLES.md)** - Eskil Steenberg's methodology explained
+- **[Skill System Guide](skills/SKILL.md)** - How skills work and auto-discovery
+
+### Using the Tools
+- **[Usage Guide](docs/USAGE.md)** - Commands and skills workflow
+- **[Agent System Guide](docs/AGENTS.md)** - Complete agent documentation
+- **[Workflows Guide](docs/WORKFLOWS.md)** - Step-by-step examples for each agent
+- **[Integration Examples](docs/INTEGRATION_EXAMPLES.md)** - How agents coordinate together
+
+### Reference & Examples
+- **[Code Examples](docs/EXAMPLES.md)** - Before/after transformations in multiple languages
+- **[Real-World Examples](examples/)** - Complete refactoring examples
+
+### Contributing
+- **[Contributing Guide](docs/CONTRIBUTING.md)** - How to contribute, report issues, add examples
 
 ## 🔍 Real-World Examples
 
@@ -129,11 +254,19 @@ See the [`examples/`](examples/) directory for complete before/after refactoring
 
 ## 🎓 Learn More
 
-### Original Source
+### Core Resources
+
+**Original Source:**
 
 Watch Eskil Steenberg's complete lecture: [Architecting LARGE Software Projects](https://www.youtube.com/watch?v=sSpULGNHyoI)
 
 This legend has built 3D engines, networked games, and complex systems all in C using these exact principles.
+
+**Complete Documentation:**
+- 📖 [Full Documentation Index](#-documentation)
+- 🎨 [Skill System Guide](skills/SKILL.md)
+- 🤖 [Agent System Guide](docs/AGENTS.md)
+- 📝 [Workflow Examples](docs/WORKFLOWS.md)
 
 ### Core Principles
 
@@ -233,6 +366,29 @@ Traditional software grows complex over time. Developer velocity slows. Features
 - New developers can contribute immediately
 
 **These AI prompts** teach your assistant to think this way automatically.
+
+## 🚀 Next Steps
+
+Choose your path based on experience level:
+
+**🌱 Beginners - Start Here:**
+1. Read [Principles Guide](docs/PRINCIPLES.md) to understand black box architecture
+2. Follow [Installation Guide](docs/INSTALLATION.md) to set up skills
+3. Try [Example Usage](#-example-usage) with a simple refactoring
+
+**🌿 Intermediate - Ready to Build:**
+1. Review [Usage Guide](docs/USAGE.md) for commands and skills
+2. Explore [Code Examples](docs/EXAMPLES.md) for patterns
+3. Study [Workflows Guide](docs/WORKFLOWS.md) for step-by-step processes
+
+**🌲 Advanced - Master the System:**
+1. Set up [Autonomous Agents](docs/AGENTS.md) for complex work
+2. Study [Integration Examples](docs/INTEGRATION_EXAMPLES.md)
+3. Create custom agents for your team's needs
+
+**📺 Watch the Source:**
+
+Watch Eskil Steenberg's [complete lecture](https://www.youtube.com/watch?v=sSpULGNHyoI) - the foundation of everything here.
 
 ---
 
