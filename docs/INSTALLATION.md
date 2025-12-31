@@ -4,10 +4,68 @@ This guide covers how to install and use the Black Box Architecture prompts in y
 
 ## Table of Contents
 
+- [Plugin Marketplace (Recommended)](#plugin-marketplace-recommended)
 - [As a Claude Skill](#as-a-claude-skill)
 - [As Slash Commands](#as-slash-commands)
 - [Manual Usage](#manual-usage)
 - [Verification](#verification)
+
+---
+
+## Plugin Marketplace (Recommended)
+
+The easiest installation method with automatic updates.
+
+### Prerequisites
+
+- Claude Code CLI installed
+
+### Installation
+
+```bash
+# Add the marketplace
+/plugin marketplace add gl0bal01/black-box-architecture
+
+# Install the plugin
+/plugin install gl0bal01@black-box-architecture
+```
+
+### Team Configuration
+
+For shared team configuration, add to `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "black-box-architecture": {
+      "source": {
+        "source": "github",
+        "repo": "gl0bal01/black-box-architecture"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "gl0bal01@black-box-architecture": true
+  }
+}
+```
+
+### Updating
+
+```bash
+# Update to the latest version
+/plugin update gl0bal01@black-box-architecture
+```
+
+### Uninstalling
+
+```bash
+# Remove the plugin
+/plugin uninstall gl0bal01@black-box-architecture
+
+# Optionally remove the marketplace
+/plugin marketplace remove black-box-architecture
+```
 
 ---
 

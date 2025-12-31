@@ -1,0 +1,43 @@
+{
+  "name": "black-box-architecture",
+  "owner": {
+    "name": "gl0bal01",
+    "email": "gl0bal01@users.noreply.github.com"
+  },
+  "metadata": {
+    "description": "Plugin marketplace for Eskil Steenberg's black box architecture principles. Provides skills, commands, and autonomous agents for modular software design.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "gl0bal01",
+      "source": "./",
+      "description": "Complete black box architecture toolkit with skills, commands, and autonomous agents for refactoring, planning, and debugging",
+      "version": "1.0.0",
+      "author": {
+        "name": "gl0bal01"
+      },
+      "homepage": "https://github.com/gl0bal01/black-box-architecture",
+      "repository": "https://github.com/gl0bal01/black-box-architecture",
+      "license": "MIT",
+      "keywords": [
+        "architecture",
+        "black-box",
+        "modular-design",
+        "refactoring",
+        "agents",
+        "skills"
+      ],
+      "commands": [
+        "./commands/"
+      ],
+      "agents": [
+        "./agents/arch-orchestrator.md",
+        "./agents/arch-analyzer.md",
+        "./agents/arch-planner.md",
+        "./agents/arch-implementer.md",
+        "./agents/arch-debugger.md"
+      ]
+    }
+  ]
+}

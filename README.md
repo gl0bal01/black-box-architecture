@@ -11,9 +11,10 @@ AI prompts optimized for **Claude Code**, **Claude** that teach your AI assistan
 
 - [What This Is](#-what-this-is)
 - [Quick Start](#-quick-start)
-  - [Option 1: Skills (Recommended)](#option-1-as-a-claude-skill-recommended)
-  - [Option 2: Commands](#option-2-as-slash-commands)
-  - [Option 3: Agents (Advanced)](#option-3-as-autonomous-agents-advanced)
+  - [Option 1: Plugin Marketplace (Recommended)](#option-1-plugin-marketplace-recommended)
+  - [Option 2: Skills](#option-2-as-a-claude-skill)
+  - [Option 3: Commands](#option-3-as-slash-commands)
+  - [Option 4: Agents (Advanced)](#option-4-as-autonomous-agents-advanced)
 - [Core Philosophy](#-core-philosophy)
 - [What's Included](#-whats-included)
 - [Skills vs Commands vs Agents](#-skills-vs-commands-vs-agents)
@@ -37,7 +38,37 @@ Three specialized AI prompts that apply [Eskil Steenberg's](https://www.youtube.
 
 ## 🚀 Quick Start
 
-### Option 1: As a Claude Skill (Recommended)
+### Option 1: Plugin Marketplace (Recommended)
+
+The easiest way to install - one command, automatic updates:
+
+```bash
+# Add the marketplace
+/plugin marketplace add gl0bal01/black-box-architecture
+
+# Install the plugin
+/plugin install gl0bal01@black-box-architecture
+```
+
+For teams, add to `.claude/settings.json`:
+
+```json
+{
+  "extraKnownMarketplaces": {
+    "black-box-architecture": {
+      "source": {
+        "source": "github",
+        "repo": "gl0bal01/black-box-architecture"
+      }
+    }
+  },
+  "enabledPlugins": {
+    "gl0bal01@black-box-architecture": true
+  }
+}
+```
+
+### Option 2: As a Claude Skill
 
 ```bash
 # Clone the repository
@@ -54,7 +85,7 @@ cp -r black-box-architecture/skills .claude/skills/black-box-architecture
 # Claude will automatically discover and use the skill when relevant
 ```
 
-### Option 2: As Slash Commands
+### Option 3: As Slash Commands
 
 ```bash
 # Copy commands to your project
@@ -66,7 +97,7 @@ cp -r commands/ .claude/commands/
 # /arch-debug - Debug with modular isolation
 ```
 
-### Option 3: As Autonomous Agents (Advanced)
+### Option 4: As Autonomous Agents (Advanced)
 
 ```bash
 # Copy agents for complex architectural workflows

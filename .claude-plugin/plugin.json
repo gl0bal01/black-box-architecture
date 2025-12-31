@@ -1,0 +1,24 @@
+{
+  "name": "gl0bal01",
+  "description": "Eskil Steenberg's black box architecture principles for building modular, maintainable software. Includes skills, commands, and autonomous agents for refactoring, planning, and debugging.",
+  "version": "1.0.0",
+  "author": {
+    "name": "gl0bal01",
+    "email": "gl0bal01@users.noreply.github.com"
+  },
+  "homepage": "https://github.com/gl0bal01/black-box-architecture",
+  "repository": "https://github.com/gl0bal01/black-box-architecture",
+  "license": "MIT",
+  "keywords": [
+    "architecture",
+    "black-box",
+    "modular-design",
+    "refactoring",
+    "code-quality",
+    "maintainability",
+    "agents",
+    "skills",
+    "debugging",
+    "planning"
+  ]
+}
