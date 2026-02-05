@@ -1,3 +1,5 @@
+**DEPRECATED**: Legacy prompt. Use agents + AGENTS_CONTRACT.md instead.
+
 ---
 name: black-box-architecture
 description: Apply Eskil Steenberg's black box architecture principles to build modular, maintainable software. Automatically refactors code into replaceable components, designs system architectures with clean boundaries, and debugs with modular isolation.

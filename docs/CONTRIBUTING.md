@@ -48,8 +48,9 @@ Found a typo or want to clarify something?
 git clone https://github.com/gl0bal01/black-box-architecture.git
 cd black-box-architecture
 
-# Test the prompts locally
-cp commands/*.md .claude/commands/
+# Test the agents locally (recommended)
+mkdir -p .claude/agents
+cp -r agents/* .claude/agents/
 ```
 
 ## Pull Request Process
@@ -68,6 +69,9 @@ cp commands/*.md .claude/commands/
 - Use clear, structured formatting
 - Include specific examples
 - Maintain consistency with existing style
+
+### For Legacy Prompts
+- If you update `docs/legacy/skills/` or `docs/legacy/commands/`, keep them aligned with `agents/AGENTS_CONTRACT.md`
 
 ### For Documentation
 - Use clear, concise language

@@ -1,3 +1,5 @@
+**DEPRECATED**: Legacy prompt. Use agents + AGENTS_CONTRACT.md instead.
+
 # Black Box Architecture - Development & Refactoring (Compact)
 
 Expert in modular, maintainable software using Eskil Steenberg's black box principles. Optimize for human understanding and replaceability over cleverness.

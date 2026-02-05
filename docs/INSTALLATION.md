@@ -4,14 +4,15 @@ This guide covers how to install and use the Black Box Architecture prompts in y
 
 ## Table of Contents
 
-- [As a Claude Skill](#as-a-claude-skill)
-- [As Slash Commands](#as-slash-commands)
-- [Manual Usage](#manual-usage)
+- [As Agents (Recommended)](#as-agents-recommended)
+- [Legacy: Claude Skills](#legacy-claude-skills)
+- [Legacy: Slash Commands](#legacy-slash-commands)
+- [Legacy: Manual Usage](#legacy-manual-usage)
 - [Verification](#verification)
 
 ---
 
-## As a Claude Skill
+## As Agents (Recommended)
 
 ### Prerequisites
 
@@ -19,7 +20,39 @@ This guide covers how to install and use the Black Box Architecture prompts in y
 
 ### Installation
 
-Skills in Claude Code are discovered automatically from the `~/.claude/skills/` directory (personal) or `.claude/skills/` directory (project-specific). There is no "install" command.
+```bash
+# Clone the repository
+git clone https://github.com/gl0bal01/black-box-architecture.git
+
+# Install agents for this project
+mkdir -p .claude/agents
+cp -r black-box-architecture/agents/* .claude/agents/
+```
+
+### Verification
+
+```bash
+# Check that agents are present
+ls -la .claude/agents/
+# Should show: arch-orchestrator.md, arch-analyzer.md, etc.
+```
+
+### Usage
+
+Use the orchestrator for most tasks:
+- "Ask arch-orchestrator to analyze module boundaries in UserService"
+- "Ask arch-orchestrator to design a module map for payments"
+- "Ask arch-orchestrator to isolate and fix a failing integration"
+
+---
+
+## Legacy: Claude Skills
+
+Skills are legacy prompts kept for compatibility. Agents are the preferred path.
+
+### Installation
+
+Skills in Claude Code are discovered automatically from the `~/.claude/skills/` directory (personal) or `.claude/skills/` directory (project-specific).
 
 ```bash
 # Clone the repository
@@ -27,45 +60,16 @@ git clone https://github.com/gl0bal01/black-box-architecture.git
 
 # For personal use (available in all your projects)
 mkdir -p ~/.claude/skills
-cp -r black-box-architecture/skills ~/.claude/skills/black-box-architecture
+cp -r black-box-architecture/docs/legacy/skills ~/.claude/skills/black-box-architecture
 
 # OR for project-specific use (shared with team via git)
 mkdir -p .claude/skills
-cp -r black-box-architecture/skills .claude/skills/black-box-architecture
+cp -r black-box-architecture/docs/legacy/skills .claude/skills/black-box-architecture
 ```
-
-### Verification
-
-```bash
-# In Claude Code, ask what skills are available
-claude
-> "What skills are available?"
-
-# Or simply start using it
-> "Refactor this UserService using black box principles"
-```
-
-### Usage
-
-Once copied to the skills directory, the skill is automatically available:
-
-```bash
-# Start Claude Code in any project
-cd your-project/
-
-# Use natural language - Claude will automatically use the skill when relevant
-```
-
-**Example prompts:**
-- "Refactor this UserService using black box principles"
-- "Design the architecture for a payment processing system"
-- "Debug this integration issue using modular isolation"
-
-The AI will automatically apply the appropriate variant (refactor, plan, or debug) based on your request.
 
 ---
 
-## As Slash Commands
+## Legacy: Slash Commands
 
 ### Prerequisites
 
@@ -87,7 +91,7 @@ cd /path/to/your/project
 mkdir -p .claude/commands
 
 # Copy command files
-cp /path/to/black-box-architecture/commands/*.md .claude/commands/
+cp /path/to/black-box-architecture/docs/legacy/commands/*.md .claude/commands/
 ```
 
 #### Option 2: Direct Download
@@ -100,9 +104,9 @@ cd /path/to/your/project
 mkdir -p .claude/commands
 
 # Download command files
-curl -o .claude/commands/arch.md https://raw.githubusercontent.com/gl0bal01/black-box-architecture/main/commands/arch.md
-curl -o .claude/commands/arch-plan.md https://raw.githubusercontent.com/gl0bal01//black-box-architecture/main/commands/arch-plan.md
-curl -o .claude/commands/arch-debug.md https://raw.githubusercontent.com/gl0bal01/black-box-architecture/main/commands/arch-debug.md
+curl -o .claude/commands/arch.md https://raw.githubusercontent.com/gl0bal01/black-box-architecture/main/docs/legacy/commands/arch.md
+curl -o .claude/commands/arch-plan.md https://raw.githubusercontent.com/gl0bal01/black-box-architecture/main/docs/legacy/commands/arch-plan.md
+curl -o .claude/commands/arch-debug.md https://raw.githubusercontent.com/gl0bal01/black-box-architecture/main/docs/legacy/commands/arch-debug.md
 ```
 
 ### Usage
@@ -130,9 +134,9 @@ After installation, use the commands in Claude Code:
 
 ---
 
-## Manual Usage
+## Legacy: Manual Usage
 
-If you prefer not to install as a skill or command, you can use the prompts manually:
+If you prefer not to install agents, you can use the legacy prompts manually.
 
 ### Prerequisites
 
@@ -141,7 +145,7 @@ If you prefer not to install as a skill or command, you can use the prompts manu
 
 ### Usage
 
-1. **Copy the appropriate prompt** from the `skills/` directory:
+1. **Copy the appropriate prompt** from the `docs/legacy/skills/` directory:
    - `refactor.md` - For code refactoring
    - `plan.md` - For architecture planning
    - `debug.md` - For debugging
@@ -168,7 +172,14 @@ npx repomix --include "src/**/*.ts" --output context.xml
 
 ## Verification
 
-### Verify Skill Installation
+### Verify Agent Installation
+
+```bash
+ls -la .claude/agents/
+# Should show: arch-orchestrator.md, arch-analyzer.md, etc.
+```
+
+### Verify Legacy Skill Installation
 
 ```bash
 # Check if skill directory exists
@@ -182,13 +193,9 @@ claude
 > "Can you explain the black box architecture principles you know?"
 ```
 
-The AI should demonstrate knowledge of:
-- 4-phase execution protocol
-- Black box principles
-- Structured output format
-- Quality validation checklists
+The AI should demonstrate knowledge of black box principles and the legacy structured output format.
 
-### Verify Command Installation
+### Verify Legacy Command Installation
 
 ```bash
 # Check if commands exist
@@ -220,7 +227,16 @@ head -n 5 .claude/commands/arch.md
 
 ## Troubleshooting
 
-### Skill Not Discovered
+### Agent Not Available
+
+**Problem**: Agents are not listed or not used
+
+**Solutions**:
+1. Verify `.claude/agents/` exists: `ls -la .claude/agents/`
+2. Confirm files are present (arch-orchestrator.md, arch-analyzer.md, etc.)
+3. Restart Claude Code CLI
+
+### Legacy Skill Not Discovered
 
 **Problem**: Claude doesn't seem to use the skill
 
@@ -231,7 +247,7 @@ head -n 5 .claude/commands/arch.md
 4. Try asking explicitly: "What skills are available?"
 5. Try manual installation via slash commands instead
 
-### Commands Not Showing Up
+### Legacy Commands Not Showing Up
 
 **Problem**: `/arch` command doesn't work
 
@@ -264,7 +280,18 @@ head -n 5 .claude/commands/arch.md
 
 ## Updating
 
-### Update Skill
+### Update Agents
+
+```bash
+# Pull latest changes
+cd /path/to/black-box-architecture
+git pull
+
+# Copy to project agents directory (overwrites existing)
+cp -r agents/* .claude/agents/
+```
+
+### Update Legacy Skill
 
 ```bash
 # Pull latest changes
@@ -272,26 +299,32 @@ cd /path/to/black-box-architecture
 git pull
 
 # Copy to skills directory (overwrites existing)
-cp -r skills ~/.claude/skills/black-box-architecture
+cp -r docs/legacy/skills ~/.claude/skills/black-box-architecture
 # OR for project-specific
-cp -r skills .claude/skills/black-box-architecture
+cp -r docs/legacy/skills .claude/skills/black-box-architecture
 ```
 
-### Update Commands
+### Update Legacy Commands
 
 ```bash
 # Re-download latest versions
 cd /path/to/your/project
-curl -o .claude/commands/arch.md https://raw.githubusercontent.com/gl0bal01//black-box-architecture/main/commands/arch.md
-curl -o .claude/commands/arch-plan.md https://raw.githubusercontent.com/gl0bal01/black-box-architecture/main/commands/arch-plan.md
-curl -o .claude/commands/arch-debug.md https://raw.githubusercontent.com/gl0bal01/black-box-architecture/main/commands/arch-debug.md
+curl -o .claude/commands/arch.md https://raw.githubusercontent.com/gl0bal01/black-box-architecture/main/docs/legacy/commands/arch.md
+curl -o .claude/commands/arch-plan.md https://raw.githubusercontent.com/gl0bal01/black-box-architecture/main/docs/legacy/commands/arch-plan.md
+curl -o .claude/commands/arch-debug.md https://raw.githubusercontent.com/gl0bal01/black-box-architecture/main/docs/legacy/commands/arch-debug.md
 ```
 
 ---
 
 ## Uninstallation
 
-### Uninstall Skill
+### Uninstall Agents
+
+```bash
+rm -rf .claude/agents/
+```
+
+### Uninstall Legacy Skill
 
 ```bash
 # Remove from personal skills
@@ -301,7 +334,7 @@ rm -rf ~/.claude/skills/black-box-architecture
 rm -rf .claude/skills/black-box-architecture
 ```
 
-### Uninstall Commands
+### Uninstall Legacy Commands
 
 ```bash
 # Remove command files
@@ -315,8 +348,6 @@ rm .claude/commands/arch-debug.md
 ## Next Steps
 
 After installation, see:
-- [Usage Guide](USAGE.md) - Learn how to use the prompts effectively
+- [Usage Guide](USAGE.md) - Learn how to use agents and legacy prompts
 - [Examples](EXAMPLES.md) - See real-world refactoring examples
 - [Principles](PRINCIPLES.md) - Understand the methodology
-
-

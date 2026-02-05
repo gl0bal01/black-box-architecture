@@ -2,9 +2,12 @@
 
 Learn how to effectively use Black Box Architecture prompts to refactor code, design systems, and debug issues.
 
+Agents are the recommended daily workflow. Commands/skills are legacy prompts kept for compatibility.
+
 ## Table of Contents
 
-- [Quick Start Workflows](#quick-start-workflows)
+- [Recommended Workflow (Agents)](#recommended-workflow-agents)
+- [Legacy Quick Start Workflows (Commands)](#legacy-quick-start-workflows-commands)
 - [Refactoring Code](#refactoring-code)
 - [Planning Architecture](#planning-architecture)
 - [Debugging Issues](#debugging-issues)
@@ -13,7 +16,21 @@ Learn how to effectively use Black Box Architecture prompts to refactor code, de
 
 ---
 
-## Quick Start Workflows
+## Recommended Workflow (Agents)
+
+Use the orchestrator for most work:
+
+```bash
+Ask arch-orchestrator: Analyze UserService and propose black-box boundaries
+Ask arch-orchestrator: Design a module map for payments with Stripe + PayPal
+Ask arch-orchestrator: Isolate failing integration between PaymentService and OrderService
+```
+
+Default to concise output and request a full report only for major changes.
+
+---
+
+## Legacy Quick Start Workflows (Commands)
 
 ### Workflow 1: Refactoring Existing Code
 
@@ -60,6 +77,8 @@ cd your-project/
 ---
 
 ## Refactoring Code
+
+Legacy command examples use `/arch`. You can replace these with `arch-orchestrator` requests.
 
 ### Use Case: Breaking Apart a God Object
 
@@ -143,6 +162,8 @@ interface StorageService {
 
 ## Planning Architecture
 
+Legacy command examples use `/arch-plan`. You can replace these with `arch-orchestrator` requests.
+
 ### Use Case: Designing a New System
 
 **Scenario**: Building a real-time chat application
@@ -215,6 +236,8 @@ interface MessageStore {
 ---
 
 ## Debugging Issues
+
+Legacy command examples use `/arch-debug`. You can replace these with `arch-orchestrator` requests.
 
 ### Use Case: Integration Test Failures
 
@@ -442,5 +465,3 @@ Help the AI understand your codebase:
 - See [Examples](EXAMPLES.md) for complete code transformations
 - Read [Principles](PRINCIPLES.md) to understand the methodology
 - Check [Contributing](CONTRIBUTING.md) to share your patterns
-
-
