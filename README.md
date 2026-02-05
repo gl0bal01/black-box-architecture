@@ -45,7 +45,7 @@ git clone https://github.com/gl0bal01/black-box-architecture.git
 
 # Install agents for this project
 mkdir -p .claude/agents
-cp -r black-box-architecture/agents/ .claude/agents/
+cp -r black-box-architecture/agents/* .claude/agents/
 ```
 
 ### Option 2: Legacy Prompts (Skills/Commands)
@@ -108,7 +108,7 @@ For daily architectural work, use the specialized agent system:
 
 ```bash
 # Copy agents to your project
-cp -r agents/ .claude/agents/
+cp -r agents/* .claude/agents/
 
 # The orchestrator coordinates all agents automatically
 ```

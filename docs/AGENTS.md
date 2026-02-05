@@ -54,7 +54,7 @@ Legacy prompts (`docs/legacy/skills/` and `docs/legacy/commands/`) are kept for 
 git clone https://github.com/gl0bal01/black-box-architecture.git
 
 # Copy agents to your project
-cp -r black-box-architecture/agents .claude/agents/
+cp -r black-box-architecture/agents/* .claude/agents/
 
 # Commit to share with team
 git add .claude/agents/
@@ -65,7 +65,7 @@ git commit -m "Add black box architecture agents"
 
 ```bash
 # Copy to home directory
-cp -r black-box-architecture/agents ~/.claude/agents/
+cp -r black-box-architecture/agents/* ~/.claude/agents/
 
 # Available in all your projects
 ```
@@ -508,7 +508,7 @@ Use refactor.md / plan.md / debug.md directly if you prefer
 ls .claude/agents/
 
 # Re-copy if needed
-cp -r black-box-architecture/agents .claude/agents/
+cp -r black-box-architecture/agents/* .claude/agents/
 ```
 
 ### Unexpected Behavior

@@ -50,7 +50,7 @@ cd black-box-architecture
 
 # Test the agents locally (recommended)
 mkdir -p .claude/agents
-cp -r agents .claude/agents/
+cp -r agents/* .claude/agents/
 ```
 
 ## Pull Request Process

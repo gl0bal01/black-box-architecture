@@ -26,7 +26,7 @@ git clone https://github.com/gl0bal01/black-box-architecture.git
 
 # Install agents for this project
 mkdir -p .claude/agents
-cp -r black-box-architecture/agents .claude/agents/
+cp -r black-box-architecture/agents/* .claude/agents/
 ```
 
 ### Verification
@@ -288,7 +288,7 @@ cd /path/to/black-box-architecture
 git pull
 
 # Copy to project agents directory (overwrites existing)
-cp -r agents .claude/agents/
+cp -r agents/* .claude/agents/
 ```
 
 ### Update Legacy Skill
