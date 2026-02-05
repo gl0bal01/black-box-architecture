@@ -1,8 +1,8 @@
 {
   "name": "black-box-architecture-agents",
-  "version": "1.0.0",
-  "description": "Specialized agents for autonomous architectural work using Eskil Steenberg's black box principles. Coordinated agent system for analysis, planning, implementation, and debugging.",
-  "author": "gl0bal01 (based on Eskil Steenberg's principles)",
+  "version": "1.1.0",
+  "description": "Specialized agents for autonomous architectural. Coordinated agent system for analysis, planning, implementation, and debugging.",
+  "author": "gl0bal01",
   "license": "MIT",
   "keywords": [
     "agents",
@@ -20,8 +20,24 @@
       "description": "Meta-agent that coordinates specialized architectural agents to handle complex workflows",
       "file": "arch-orchestrator.md",
       "role": "coordination",
-      "delegates": ["analyzer", "planner", "implementer", "debugger"],
-      "skills_used": []
+      "delegates": [
+        "analyzer",
+        "planner",
+        "implementer",
+        "debugger"
+      ],
+      "skills_used": [],
+      "policy": {
+        "can_modify_code": false,
+        "can_delegate": true,
+        "owns_approval_gates": true,
+        "use_subagents_when": [
+          "analysis",
+          "planning",
+          "debugging",
+          "multi-module refactors"
+        ]
+      }
     },
     "analyzer": {
       "name": "Architecture Analyzer",
@@ -29,7 +45,14 @@
       "file": "arch-analyzer.md",
       "role": "analysis",
       "delegates": [],
-      "skills_used": ["refactor", "debug"]
+      "skills_used": [
+        "refactor",
+        "debug"
+      ],
+      "policy": {
+        "can_modify_code": false,
+        "can_delegate": false
+      }
     },
     "planner": {
       "name": "Architecture Planner",
@@ -37,7 +60,13 @@
       "file": "arch-planner.md",
       "role": "design",
       "delegates": [],
-      "skills_used": ["plan"]
+      "skills_used": [
+        "plan"
+      ],
+      "policy": {
+        "can_modify_code": false,
+        "can_delegate": false
+      }
     },
     "implementer": {
       "name": "Architecture Implementer",
@@ -45,7 +74,19 @@
       "file": "arch-implementer.md",
       "role": "implementation",
       "delegates": [],
-      "skills_used": ["refactor"]
+      "skills_used": [
+        "refactor"
+      ],
+      "policy": {
+        "can_modify_code": true,
+        "can_delegate": false,
+        "requires_approval_for": [
+          "deps",
+          "public_api",
+          "schema",
+          "deletions"
+        ]
+      }
     },
     "debugger": {
       "name": "Architecture Debugger",
@@ -53,30 +94,53 @@
       "file": "arch-debugger.md",
       "role": "debugging",
       "delegates": [],
-      "skills_used": ["debug"]
+      "skills_used": [
+        "debug"
+      ],
+      "policy": {
+        "can_modify_code": false,
+        "can_delegate": false,
+        "may_request_agent": "implementer"
+      }
     }
   },
   "workflows": {
     "analysis_only": {
       "description": "Analyze codebase architecture without making changes",
-      "agents": ["analyzer"]
+      "agents": [
+        "analyzer"
+      ]
     },
     "planning_only": {
       "description": "Design architecture for a new feature or system",
-      "agents": ["planner"]
+      "agents": [
+        "planner"
+      ]
     },
     "full_refactoring": {
       "description": "Complete architectural transformation: analyze → design → implement",
-      "agents": ["analyzer", "planner", "implementer"],
+      "agents": [
+        "analyzer",
+        "planner",
+        "implementer"
+      ],
       "requires_approval": true
     },
     "debug_and_fix": {
       "description": "Debug modular system and implement fix",
-      "agents": ["debugger", "implementer"]
+      "agents": [
+        "debugger",
+        "implementer"
+      ]
     },
     "complete_transformation": {
       "description": "Comprehensive architectural overhaul with validation",
-      "agents": ["analyzer", "planner", "implementer", "debugger"],
+      "agents": [
+        "analyzer",
+        "planner",
+        "implementer",
+        "debugger"
+      ],
       "requires_approval": true
     }
   },
@@ -104,5 +168,13 @@
   },
   "repository": "https://github.com/gl0bal01/black-box-architecture",
   "homepage": "https://github.com/gl0bal01/black-box-architecture#readme",
-  "bugs": "https://github.com/gl0bal01/black-box-architecture/issues"
+  "bugs": "https://github.com/gl0bal01/black-box-architecture/issues",
+  "contract": {
+    "file": "AGENTS_CONTRACT.md",
+    "schema_version": "1",
+    "defaults": {
+      "communication": "concise",
+      "use_file_line_evidence": true
+    }
+  }
 }

@@ -11,13 +11,13 @@ AI prompts optimized for **Claude Code**, **Claude** that teach your AI assistan
 
 - [What This Is](#-what-this-is)
 - [Quick Start](#-quick-start)
-  - [Option 1: Skills (Recommended)](#option-1-as-a-claude-skill-recommended)
-  - [Option 2: Commands](#option-2-as-slash-commands)
-  - [Option 3: Agents (Advanced)](#option-3-as-autonomous-agents-advanced)
+  - [Option 1: Agents (Recommended)](#option-1-agents-recommended)
+  - [Option 2: Legacy Prompts (Skills/Commands)](#option-2-legacy-prompts-skillscommands)
+- [Best Daily Workflow](#-best-daily-workflow)
 - [Core Philosophy](#-core-philosophy)
 - [What's Included](#-whats-included)
-- [Skills vs Commands vs Agents](#-skills-vs-commands-vs-agents)
-- [Autonomous Agents](#-autonomous-agents-advanced)
+- [Agents](#-agents)
+- [Legacy Prompts](#-legacy-prompts)
 - [Example Usage](#-example-usage)
 - [Documentation](#-documentation)
 - [Real-World Examples](#-real-world-examples)
@@ -37,47 +37,37 @@ Three specialized AI prompts that apply [Eskil Steenberg's](https://www.youtube.
 
 ## 🚀 Quick Start
 
-### Option 1: As a Claude Skill (Recommended)
+### Option 1: Agents (Recommended)
 
 ```bash
 # Clone the repository
 git clone https://github.com/gl0bal01/black-box-architecture.git
 
-# For personal use (available in all projects)
-mkdir -p ~/.claude/skills
-cp -r black-box-architecture/skills ~/.claude/skills/black-box-architecture
+# Install agents for this project
+mkdir -p .claude/agents
+cp -r black-box-architecture/agents/ .claude/agents/
+```
 
-# OR for project-specific use (shared with team via git)
+### Option 2: Legacy Prompts (Skills/Commands)
+
+Legacy prompts are still available but no longer the recommended path.
+
+```bash
+# Skills (legacy)
 mkdir -p .claude/skills
-cp -r black-box-architecture/skills .claude/skills/black-box-architecture
+cp -r black-box-architecture/docs/legacy/skills .claude/skills/black-box-architecture
 
-# Claude will automatically discover and use the skill when relevant
+# Commands (legacy)
+mkdir -p .claude/commands
+cp -r black-box-architecture/docs/legacy/commands/ .claude/commands/
 ```
 
-### Option 2: As Slash Commands
+## ✅ Best Daily Workflow
 
-```bash
-# Copy commands to your project
-cp -r commands/ .claude/commands/
-
-# Use with:
-# /arch - Refactor code with black box principles
-# /arch-plan - Design system architecture
-# /arch-debug - Debug with modular isolation
-```
-
-### Option 3: As Autonomous Agents (Advanced)
-
-```bash
-# Copy agents for complex architectural workflows
-cp -r agents/ .claude/agents/
-
-# Agents autonomously handle:
-# - Multi-step analysis and refactoring
-# - Strategic architecture design
-# - Complex debugging with module isolation
-# - Coordinated workflows across multiple specialists
-```
+1. Use `arch-orchestrator` for most tasks.
+2. Ask for concise output by default.
+3. Request a full report only for big changes.
+4. Approve any dependency, public API, or schema changes explicitly.
 
 ## 💡 Core Philosophy
 
@@ -92,52 +82,27 @@ These prompts optimize for:
 
 ## 📦 What's Included
 
-### Three Specialized Prompts
+- **Agents pack** in `agents/` with orchestrator + specialists
+- **Shared contract** in `agents/AGENTS_CONTRACT.md`
+- **Legacy prompts** in `docs/legacy/skills/` and `docs/legacy/commands/` (deprecated)
+- **Examples and docs** in `examples/` and `docs/`
 
-| Prompt | Use Case | Token Cost |
-|--------|----------|------------|
-| **refactor** | Break apart monoliths, create module boundaries | ~750 tokens |
-| **plan** | Design new systems, strategic architecture | ~1,140 tokens |
-| **debug** | Systematic debugging, testing strategies | ~1,450 tokens |
+## 🤖 Agents
 
-### Key Features
+Agents are the primary, recommended path. They enforce:
+- scope discipline
+- approval gates for risky changes
+- evidence-backed findings
+- concise, reviewable outputs
 
-- ✅ **Structured 4-phase workflow** (Discovery → Analysis → Design → Implementation)
-- ✅ **Mandatory output templates** (consistent, parseable responses)
-- ✅ **Quality validation checklists** (explicit success criteria)
-- ✅ **Multi-language support** (Python, TypeScript, Go, Rust, C, PHP)
-- ✅ **Token-optimized** (compact but comprehensive)
-- ✅ **Tool integration** (Glob, Grep, Read, Edit for Claude Code)
+## 🧩 Legacy Prompts
 
-## 🎨 Skills vs Commands vs Agents
+`docs/legacy/skills/` and `docs/legacy/commands/` are legacy prompts kept for compatibility.
+They may drift from the contract and are not the best daily path.
 
-Understanding the three ways to use black box architecture principles:
+## 🤖 Autonomous Agents (Recommended)
 
-| Aspect | Skills | Commands | Agents |
-|--------|--------|----------|--------|
-| **Activation** | Auto-discovered by Claude | Manual `/command` | Delegated by orchestrator |
-| **Use Case** | Passive expertise | Quick templates | Complex autonomous tasks |
-| **Context** | Shared | Shared | Separate (isolated) |
-| **Best For** | Background knowledge | Direct control | Multi-step workflows |
-
-**Skills** ([Learn more](skills/SKILL.md)):
-- Claude automatically discovers when relevant
-- Three variants: refactor, plan, debug
-- Provides expertise without explicit invocation
-
-**Commands** ([Learn more](docs/USAGE.md)):
-- User explicitly triggers with `/arch`, `/arch-plan`, `/arch-debug`
-- Full control over execution
-- Template-based responses
-
-**Agents** ([Learn more](docs/AGENTS.md)):
-- Autonomous specialists that coordinate together
-- Handle complex, multi-step tasks
-- Separate context windows prevent pollution
-
-## 🤖 Autonomous Agents (Advanced)
-
-For complex, multi-step architectural work, use the **specialized agent system**:
+For daily architectural work, use the specialized agent system:
 
 ### Installation
 
@@ -174,15 +139,9 @@ The agent system follows black box principles itself - specialized agents with c
 
 ### Why Agents?
 
-- **Commands**: Manual triggers for templates (user control)
-- **Skills**: Passive knowledge Claude auto-discovers (expertise)
-- **Agents**: Active specialists that autonomously execute complex tasks (delegation)
-
-Agents provide:
-- **Autonomous execution** - Multi-step workflows without constant guidance
-- **Context isolation** - Separate context windows prevent pollution
-- **Specialized reasoning** - Each agent is expert in its domain
-- **Composability** - Agents coordinate through well-defined interfaces
+- They follow a shared contract for consistent, reviewable outputs.
+- They enforce approval gates for dependencies, APIs, and schemas.
+- They scale from quick analysis to full refactors without changing tools.
 
 **Learn More:**
 - 📖 [Complete Agent Documentation](docs/AGENTS.md) - Detailed guide for each agent
@@ -195,8 +154,8 @@ Agents provide:
 ### Refactoring Example
 
 ```bash
-# Using as a command
-/arch Analyze the UserService class and break it into black box modules
+# Using the orchestrator
+Ask arch-orchestrator: Analyze UserService and propose black-box boundaries
 ```
 
 **What you get:**
@@ -210,8 +169,8 @@ Agents provide:
 ### Planning Example
 
 ```bash
-# Using the skill or command
-/arch-plan I'm building a real-time chat app with React and Node.js
+# Using the orchestrator
+Ask arch-orchestrator: Design a module map for a real-time chat app
 ```
 
 **What you get:**
@@ -225,12 +184,11 @@ Agents provide:
 ## 📚 Documentation
 
 ### Getting Started
-- **[Installation Guide](docs/INSTALLATION.md)** - Detailed setup for skills, commands, and agents
+- **[Installation Guide](docs/INSTALLATION.md)** - Setup for agents and legacy prompts
 - **[Principles Guide](docs/PRINCIPLES.md)** - Eskil Steenberg's methodology explained
-- **[Skill System Guide](skills/SKILL.md)** - How skills work and auto-discovery
 
 ### Using the Tools
-- **[Usage Guide](docs/USAGE.md)** - Commands and skills workflow
+- **[Usage Guide](docs/USAGE.md)** - Agent workflow and legacy prompts
 - **[Agent System Guide](docs/AGENTS.md)** - Complete agent documentation
 - **[Workflows Guide](docs/WORKFLOWS.md)** - Step-by-step examples for each agent
 - **[Integration Examples](docs/INTEGRATION_EXAMPLES.md)** - How agents coordinate together
@@ -264,7 +222,7 @@ This legend has built 3D engines, networked games, and complex systems all in C 
 
 **Complete Documentation:**
 - 📖 [Full Documentation Index](#-documentation)
-- 🎨 [Skill System Guide](skills/SKILL.md)
+- 🎨 [Skill System Guide](docs/legacy/skills/SKILL.md)
 - 🤖 [Agent System Guide](docs/AGENTS.md)
 - 📝 [Workflow Examples](docs/WORKFLOWS.md)
 
@@ -278,54 +236,10 @@ This legend has built 3D engines, networked games, and complex systems all in C 
 
 ## 🛠️ How It Works
 
-### The 4-Phase Protocol
-
-Each prompt follows a structured workflow:
-
-**Phase 1: Discovery (15-20%)**
-- Map codebase structure
-- Find core primitives
-- Read critical files
-- STOP and confirm understanding
-
-**Phase 2: Analysis (25-30%)**
-- Identify black box boundaries
-- Map dependencies
-- Find coupling violations
-- Document with file:line references
-
-**Phase 3: Design (30-35%)**
-- Design clean interfaces
-- Show before/after examples
-- Plan migration path
-- Get user approval
-
-**Phase 4: Implementation (30-35%)**
-- Refactor one module at a time
-- Surgical edits with tests
-- Validate continuously
-- Commit incrementally
-
-### Structured Output Format
-
-All responses follow a consistent template:
-
-```markdown
-## 🔍 Current Architecture
-[Primitives, modules, coupling issues, violations]
-
-## 🎯 Proposed Black Box Design
-[Module designs with interfaces]
-
-## 📝 Implementation Steps
-[Specific, actionable steps]
-
-## ⚠️ Risks & Mitigation
-[What could go wrong + how to prevent]
-
-## ✅ Quality Gates
-[Validation checklist]
-```
+- A shared contract governs agent behavior and output structure.
+- Agents default to concise outputs and switch to full reports when needed.
+- Approval gates prevent risky changes without explicit sign-off.
+- Evidence and verification are required for non-trivial claims.
 
 ## 🤝 Contributing
 
@@ -335,19 +249,11 @@ Contributions welcome! See [CONTRIBUTING.md](docs/CONTRIBUTING.md) for:
 - Sharing successful patterns
 - Adding language examples
 
-## 📊 Token Efficiency
-
-These prompts are **token-optimized** for frequent use:
-
-- Compact versions: ~3,300 tokens total
-- Enhanced versions available (12,000 tokens) for reference
-- 71% smaller while maintaining full structured workflow
-
 ## 🔗 Related Resources
 
 - [Original ai-architecture-prompts](https://github.com/Alexanderdunlop/ai-architecture-prompts) - Inspiration and foundation
 - [Eskil's Video: Architecting LARGE Software Projects](https://www.youtube.com/watch?v=sSpULGNHyoI)
-- [Enhanced Versions](enhanced/) - Comprehensive reference documentation
+- [Enhanced Versions](enhanced/) - Legacy reference documentation
 
 ## 📄 License
 
@@ -369,28 +275,13 @@ Traditional software grows complex over time. Developer velocity slows. Features
 
 ## 🚀 Next Steps
 
-Choose your path based on experience level:
-
-**🌱 Beginners - Start Here:**
-1. Read [Principles Guide](docs/PRINCIPLES.md) to understand black box architecture
-2. Follow [Installation Guide](docs/INSTALLATION.md) to set up skills
-3. Try [Example Usage](#-example-usage) with a simple refactoring
-
-**🌿 Intermediate - Ready to Build:**
-1. Review [Usage Guide](docs/USAGE.md) for commands and skills
-2. Explore [Code Examples](docs/EXAMPLES.md) for patterns
-3. Study [Workflows Guide](docs/WORKFLOWS.md) for step-by-step processes
-
-**🌲 Advanced - Master the System:**
-1. Set up [Autonomous Agents](docs/AGENTS.md) for complex work
-2. Study [Integration Examples](docs/INTEGRATION_EXAMPLES.md)
-3. Create custom agents for your team's needs
-
-**📺 Watch the Source:**
+1. Install agents and run a small analysis with `arch-orchestrator`.
+2. Use concise output for daily work, request full reports only when needed.
+3. Approve dependencies, public API changes, and schemas explicitly.
+4. If you must use legacy prompts, keep them aligned with the contract.
 
 Watch Eskil Steenberg's [complete lecture](https://www.youtube.com/watch?v=sSpULGNHyoI) - the foundation of everything here.
 
 ---
 
 **Not affiliated with Anthropic, Eskil Steenberg, or any tools mentioned. Battle-tested principles from real development work.**
-

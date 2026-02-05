@@ -16,7 +16,10 @@ Complete guide to using the autonomous agent system for complex architectural wo
 
 The Black Box Architecture agent system provides **autonomous specialists** that handle complex, multi-step architectural tasks without constant guidance.
 
-### When to Use Agents vs Commands vs Skills
+Agents follow a shared contract: `agents/AGENTS_CONTRACT.md`.
+Legacy prompts (`docs/legacy/skills/` and `docs/legacy/commands/`) are kept for compatibility but are not recommended for daily use.
+
+### When to Use Agents vs Commands vs Skills (Legacy)
 
 | Feature | Commands | Skills | Agents |
 |---------|----------|--------|--------|
@@ -32,12 +35,12 @@ The Black Box Architecture agent system provides **autonomous specialists** that
 - Want to prevent context pollution in main conversation
 - Complex workflow with checkpoints and approvals
 
-**Use commands when:**
+**Use commands when (legacy):**
 - Simple, straightforward workflow
 - User wants direct control over each step
 - Quick template-based responses
 
-**Use skills when:**
+**Use skills when (legacy):**
 - Providing reusable expertise that should be auto-discovered
 - Building knowledge modules agents can leverage
 - Creating packaged capabilities
@@ -102,10 +105,8 @@ The agent system follows black box principles itself:
          │         │           │           │
          ▼         ▼           ▼           ▼
     ┌────────────────────────────────────────┐
-    │          Skills (Knowledge)            │
-    │  • refactor.md                         │
-    │  • plan.md                             │
-    │  • debug.md                            │
+    │        Shared Contract (AGENTS_CONTRACT.md)       │
+    │  • scope • evidence • approvals • verification    │
     └────────────────────────────────────────┘
 ```
 
@@ -126,10 +127,10 @@ The agent system follows black box principles itself:
 - Prevents context pollution
 - Maintains focus on specific task
 
-**4. Skills as Tools**
-- Agents USE skills for expertise
-- Skills provide reusable knowledge
-- Clear separation: agents (workers) vs skills (knowledge)
+**4. Legacy Prompts (Optional)**
+- Skills/commands can be used for compatibility
+- Agents do not require them for daily use
+- Keep legacy prompts aligned with the shared contract if used
 
 ## Individual Agents
 
@@ -145,7 +146,7 @@ The agent system follows black box principles itself:
 
 **Delegates To**: All other agents
 
-**Skills Used**: None (coordinates others)
+**Legacy Prompts**: None (coordinates others)
 
 **When to Use Directly**: When you have a complex request requiring multiple agents
 
@@ -177,7 +178,7 @@ and implement them following black box principles"
 
 **Delegates To**: None (leaf agent)
 
-**Skills Used**: refactor.md, debug.md
+**Legacy Prompts**: Optional (refactor/debug)
 
 **When to Use Directly**: When you only want analysis, no changes
 
@@ -215,7 +216,7 @@ and implement them following black box principles"
 
 **Delegates To**: None (leaf agent)
 
-**Skills Used**: plan.md
+**Legacy Prompts**: Optional (plan)
 
 **When to Use Directly**: When designing new features or systems from scratch
 
@@ -257,7 +258,7 @@ that needs to scale to 1M users"
 
 **Delegates To**: None (does the implementation work)
 
-**Skills Used**: refactor.md
+**Legacy Prompts**: Optional (refactor)
 
 **When to Use Directly**: When you have an approved plan ready to implement
 
@@ -300,7 +301,7 @@ that needs to scale to 1M users"
 
 **Delegates To**: May suggest arch-implementer for complex fixes
 
-**Skills Used**: debug.md
+**Legacy Prompts**: Optional (debug)
 
 **When to Use Directly**: When debugging issues in modular systems
 
@@ -487,13 +488,12 @@ For implementation, focus incrementally:
 ❌ "Implement all 15 modules at once"
 ```
 
-### 6. Leverage Skills
+### 6. Leverage Legacy Prompts (Optional)
 
-Agents automatically use skills - you can too:
+Legacy prompts can be used directly if you need them:
 
 ```
-Agents use refactor.md skill
-You can also activate the skill directly when needed
+Use refactor.md / plan.md / debug.md directly if you prefer
 ```
 
 ## Troubleshooting
@@ -533,7 +533,7 @@ cp -r black-box-architecture/agents .claude/agents/
 
 **Problem**: Want to control each step
 
-**Solution**: Use commands instead of agents
+**Solution**: Use legacy commands instead of agents
 ```bash
 /arch          # More control than orchestrator
 /arch-plan     # More control than planner
@@ -580,7 +580,7 @@ Agents can be part of automated workflows:
 ## FAQ
 
 **Q: Can I use agents without skills?**
-A: Agents reference skills for expertise, but skills are embedded in agent files.
+A: Yes. Agents do not require skills; skills are legacy prompts.
 
 **Q: Do agents modify code automatically?**
 A: Only arch-implementer modifies code, and only after explicit approval.
@@ -609,7 +609,7 @@ A: No - they work offline with your local codebase.
 
 - [Agent Specifications](../agents/agent.json) - Technical details
 - [Individual Agent Files](../agents/) - Full agent implementations
-- [Skills Documentation](../skills/) - Knowledge modules agents use
+- [Skills Documentation](../docs/legacy/skills/) - Legacy knowledge modules (optional)
 - [Examples](../examples/) - Real-world refactorings
 
 ---

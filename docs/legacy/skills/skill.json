@@ -1,0 +1,35 @@
+{
+  "name": "black-box-architecture",
+  "version": "1.0.0",
+  "description": "Eskil Steenberg's black box architecture principles for building modular, maintainable software. Optimized prompts for refactoring, planning, and debugging.",
+  "author": "Community (based on Eskil Steenberg's principles)",
+  "license": "MIT",
+  "keywords": [
+    "architecture",
+    "black-box",
+    "modular-design",
+    "refactoring",
+    "code-quality",
+    "maintainability"
+  ],
+  "variants": {
+    "refactor": {
+      "name": "Refactor with Black Box Principles",
+      "description": "Analyze and refactor code into modular, replaceable black box components",
+      "file": "refactor.md"
+    },
+    "plan": {
+      "name": "Plan System Architecture",
+      "description": "Design strategic architecture with black box module boundaries",
+      "file": "plan.md"
+    },
+    "debug": {
+      "name": "Debug with Modular Isolation",
+      "description": "Systematically debug using black box boundary analysis",
+      "file": "debug.md"
+    }
+  },
+  "repository": "https://github.com/gl0bal01/black-box-architecture",
+  "homepage": "https://github.com/gl0bal01/black-box-architecture#readme",
+  "bugs": "https://github.com/gl0bal01/black-box-architecture/issues"
+}
