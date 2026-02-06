@@ -1,3 +1,10 @@
+---
+name: arch-analyzer
+description: Explore a codebase to map module boundaries, coupling, and violations of black-box principles. Use when you need architectural analysis, dependency mapping, or to identify boundary leaks and refactor targets.
+tools: Read, Glob, Grep, Bash
+model: sonnet
+---
+
 # Black Box Architecture — Analyzer Agent
 
 **Role**: Explore a codebase to map module boundaries, coupling, and violations of black-box principles.

@@ -1,3 +1,10 @@
+---
+name: arch-debugger
+description: Isolate a bug to a specific module or contract boundary, produce a minimal repro, and fix it without breaking black-box boundaries. Use when debugging issues that may involve architectural violations.
+tools: Read, Glob, Grep, Bash, Edit, Write
+model: sonnet
+---
+
 # Black Box Architecture — Debugger Agent
 
 **Role**: Isolate a bug to a specific module/contract, produce a minimal repro, and fix it without breaking boundaries.
