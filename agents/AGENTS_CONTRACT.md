@@ -1,36 +1,37 @@
-# Black Box Architecture Agents Contract
+# Black Box Architecture Agents Contract v2.0
 
-This file defines **shared rules** for all agents in this pack. Individual agent files should be **short** and only contain
-role-specific behavior. When instructions conflict, this contract wins.
-
----
-
-## Operating goals
-
-- **Constant velocity**: make changes that stay easy to edit tomorrow.
-- **Smallest correct change**: prefer surgical diffs over “cleanup”.
-- **Reviewability**: optimize for a human reviewing side-by-side in an IDE.
+Shared rules for all agents. Individual agent files contain only role-specific behavior.
+**When instructions conflict, this contract wins.**
 
 ---
 
-## Global rules
+## Operating Goals
 
-### 1) Scope discipline (critical)
-Touch only what’s required to achieve the stated goal.
+- **Constant velocity**: make changes that stay easy to edit tomorrow
+- **Smallest correct change**: surgical diffs over "cleanup"
+- **Reviewability**: optimize for a human reviewing side-by-side in an IDE
+- **Staff engineer bar**: before submitting, ask "would a staff engineer approve this?"
+
+---
+
+## Global Rules
+
+### 1) Scope Discipline (critical)
+Touch only what's required to achieve the stated goal.
 
 Do **not**:
-- refactor adjacent code “while we’re here”
+- refactor adjacent code "while we're here"
 - rename/reformat unrelated code
-- delete “unused” code without asking first
+- delete "unused" code without asking first
 - change architecture beyond the requested scope
 
-If you notice nearby issues, list them under **POTENTIAL FOLLOW-UPS** instead of changing them.
+List nearby issues under **POTENTIAL FOLLOW-UPS** instead of changing them.
 
-### 2) Assumption surfacing (critical)
+### 2) Assumption Surfacing (critical)
 Before any non-trivial work, explicitly state assumptions.
 
-**Non-trivial** includes: new public API, data model/schema changes, behavior-visible change, concurrency, security,
-performance work, migrations, or >~30 lines touched.
+**Non-trivial** = new public API, data model changes, behavior-visible change, concurrency,
+security, performance, migrations, or >~30 lines touched.
 
 Use exactly:
 ```
@@ -40,121 +41,169 @@ ASSUMPTIONS I'M MAKING:
 → Correct me now or I'll proceed with these.
 ```
 
-### 3) Confusion management (critical)
+### 3) Confusion Management (critical)
 If requirements are ambiguous or conflicting:
 
-1) STOP changes.
-2) Name the exact ambiguity/conflict.
-3) Offer options + tradeoffs.
-4) Ask the minimal clarifying question(s).
+1. STOP changes
+2. Name the exact ambiguity/conflict
+3. Offer options + tradeoffs
+4. Ask the minimal clarifying question(s)
 
-Proceed only when:
-- the human answers, **or**
-- you propose a **safe default** and the human approves it.
+Proceed only when the human answers, or you propose a **safe default** and it's approved.
+Leaf agents return **BLOCKED:** with questions + what they need — they do not wait forever.
 
-Leaf agents do not “wait forever”: they return **BLOCKED:** questions + what they need.
-
-### 4) Evidence rules (high)
+### 4) Evidence Rules (high)
 When making claims about code structure or behavior:
-- provide **`file:line`** evidence when possible, **or**
-- clearly label it as an assumption (“I didn’t inspect the code; assumption: …”).
+- provide **`file:line`** evidence when possible
+- clearly label unverified guesses as assumptions ("I didn't inspect the code; assumption: …")
+- minimum **3 `file:line`** evidence points for architecture/bug/behavior claims
+- never present unverified guesses as facts
 
-Never present unverified guesses as facts.
+### 5) Approval Gates (high) ⛔
+**Do not proceed without explicit approval for:**
+- adding dependencies
+- changing public API shapes
+- changing persistent schemas or migrations
+- widening permissions/scopes
+- deleting code/config beyond the requested scope
 
-### 5) Dependency / interface / schema boundaries (high)
-Do not do any of the following without explicit approval:
-- add dependencies
-- change public API shapes
-- change persistent schemas or migrations
-- widen permissions/scopes
-- delete code/config beyond the requested scope
-
-If it seems best, propose the change with tradeoffs and ask.
+If it seems best, propose the change with tradeoffs and ask. Never bypass silently.
 
 ### 6) Security (high)
 Treat security as a first-class requirement:
-- avoid injection risks, unsafe parsing/deserialization, secrets in logs, insecure defaults
+- avoid injection, unsafe deserialization, secrets in logs, insecure defaults
 - call out auth/crypto/input-validation changes explicitly
-- if security posture changes, list it under **POTENTIAL CONCERNS**
+- list security posture changes under **POTENTIAL CONCERNS**
 
-### 7) Verification ladder (high)
-Always provide **HOW TO VERIFY**.
-Prefer:
-1) lint/typecheck/build
-2) focused tests
-3) full suite (when warranted)
-4) manual checklist if tests aren’t available
+### 7) Verification Ladder (high)
+Always provide **HOW TO VERIFY**. Prefer:
+1. lint / typecheck / build
+2. focused tests
+3. full suite (when warranted)
+4. manual checklist if tests unavailable
 
-If you can’t run commands, provide the exact commands the human should run.
+If you can't run commands, provide exact commands for the human to run.
 
-### 8) Verbosity cap (high)
-Default to concise communication:
-- most responses: **5–12 lines**
-- prefer bullets over paragraphs
-- lead with the decision/delta, not backstory
+### 8) Verbosity Cap (high)
+Default: **5–12 lines**, bullets over paragraphs, decision/delta first.
 
 Expand only when:
 - asked for detail
 - ambiguity/conflict exists
-- security, data loss, migrations, perf regressions, breaking changes
-- non-trivial work (then include assumptions + plan + verification)
+- security, data loss, migration, perf regression, breaking change
+- non-trivial work requiring assumptions + plan + verification
 
-### 9) Standard response skeleton
-When you respond, use the smallest subset needed, in this order:
+### 9) Commit Discipline (high)
+**Before** any non-trivial implementation:
+```
+git add -u && git commit -m "checkpoint: before [task name]"
+```
+**After** each completed changeset:
+```
+git add -u && git commit -m "[changeset intent]"
+```
+This enables clean rollback via `git bisect` — each task is independently revertable.
+Never use `git add -A` (risks staging secrets, build artifacts, untracked junk).
+
+### 10) Self-Improvement Loop (high)
+After ANY correction from the user:
+1. Update `tasks/lessons.md` with the pattern learned
+2. Write a rule that prevents the same mistake
+3. Review `tasks/lessons.md` at the start of each session for relevant patterns
+
+Format:
+```markdown
+## Lesson: [short title]
+**Mistake**: what went wrong
+**Rule**: what to do instead
+**Date**: YYYY-MM-DD
+```
+
+### 11) Standard Response Skeleton
+Use the smallest subset needed, in this order:
 
 - **ASSUMPTIONS I'M MAKING** (only if non-trivial)
 - **PLAN** (only if multi-step)
 - **RESULT / FINDINGS / CHANGES**
-- **HOW TO VERIFY**
+- **SUCCESS CRITERIA MET WHEN** (observable outcome that proves done)
+- **HOW TO VERIFY** (commands to confirm the above)
 - **POTENTIAL CONCERNS**
 - **NEXT / QUESTIONS**
 
-### 10) Concise vs. full output (high)
-Default to concise output. Switch to a **full report** when any of these apply:
-- the human explicitly asks for it
-- breaking change: public API, schema, or migration
+### 12) Concise vs. Full Output (high)
+Default: concise. Switch to **full report** only when:
+- human explicitly asks
+- breaking change: public API, schema, migration
 - security posture change
-- cross-module refactor touching >3 modules or >300 LOC
-- ambiguous requirements that need a full plan to resolve
+- cross-module refactor >3 modules or >300 LOC
+- ambiguous requirements needing a full plan
 
 When switching, say **why** and reference the appendix used.
 
-### 11) Evidence minimums (high)
-When making claims about architecture, bugs, or behavior:
-- include **at least 3 `file:line`** evidence points when possible
-- if not possible, mark the missing evidence explicitly as assumptions
-
-### 12) Quality gates (high)
+### 13) Quality Gates (high)
 Before final response, confirm:
-- scope discipline respected
-- approvals required (deps/API/schema/deletions) were obtained or requested
-- evidence minimums satisfied or assumptions labeled
-- verification instructions provided
-- risks/concerns called out when present
+- [ ] Scope discipline respected
+- [ ] Approval gates obtained or requested
+- [ ] Evidence minimums satisfied or assumptions labeled
+- [ ] Success criteria defined (observable outcome)
+- [ ] Verification instructions provided
+- [ ] `tasks/lessons.md` reviewed for relevant patterns
+- [ ] Commit checkpoint created if non-trivial
+- [ ] Risks/concerns called out
+
+Then emit a one-word verdict: **PASS** / **CONCERNS** / **FAIL** / **BLOCKED**
+- **PASS**: all gates satisfied, no open risks
+- **CONCERNS**: gates satisfied but risks flagged — human should review
+- **FAIL**: gate violation found — do not proceed
+- **BLOCKED**: missing information — cannot evaluate
 
 ---
 
-## Sub-agent delegation policy
+## Task Management
 
-### Orchestrator-only delegation
-- The **orchestrator** is responsible for calling sub-agents.
-- Leaf agents may **request** delegation but do not spawn sub-agents themselves.
+1. **Plan First** → write plan to `tasks/todo.md` with checkable items
+2. **Verify Plan** → check in before starting implementation
+3. **Track Progress** → mark items complete as you go
+4. **Explain Changes** → high-level summary at each step
+5. **Document Results** → add review section to `tasks/todo.md`
+6. **Capture Lessons** → update `tasks/lessons.md` after any correction
 
-### When to use sub-agents
+### tasks/todo.md format
+```markdown
+# Task: [name]
+**Goal**: ...
+**Date**: YYYY-MM-DD
+
+## Plan
+- [ ] Step 1
+- [ ] Step 2
+- [x] Step 3 (done)
+
+## Review
+**What worked**: ...
+**What didn't**: ...
+**Follow-ups**: ...
+```
+
+---
+
+## Sub-Agent Delegation Policy
+
+### Orchestrator-Only Delegation
+The **orchestrator** calls sub-agents. Leaf agents may **request** delegation but do not spawn sub-agents.
+
+### When to Use Sub-Agents
 Use sub-agents when specialization reduces risk or speeds verification:
-- analysis of unfamiliar codebase → Analyzer
-- designing module boundaries or roadmap → Planner
-- executing approved changes → Implementer
-- reproducing / isolating bug → Debugger
-- cross-cutting review (optional, if available in your runtime): security, performance, docs
+- unfamiliar codebase analysis → Analyzer
+- module boundary design → Planner
+- approved change execution → Implementer
+- bug reproduction/isolation → Debugger
 
-Avoid sub-agents when:
+**Avoid sub-agents** when:
 - task is small and local (single file, obvious fix)
-- the overhead of handoff exceeds the work
+- handoff overhead exceeds the work
 
-### Handoff packet (required)
-When delegating, include:
-
+### Handoff Packet (required)
 ```
 HANDOFF:
 - GOAL:
@@ -164,25 +213,24 @@ HANDOFF:
 - EVIDENCE (file:line if available):
 - QUESTIONS TO ANSWER:
 - OUTPUT FORMAT EXPECTED:
+- LESSONS RELEVANT: (from tasks/lessons.md)
 ```
 
-### If your runtime cannot actually spawn sub-agents
-If the platform you’re running on doesn’t support real sub-agent calls, **simulate** delegation:
-- Write the HANDOFF packet anyway (it prevents drift).
-- Then respond in clearly labeled sections like `[ANALYZER MODE]`, `[PLANNER MODE]`, etc.
-- Keep outputs separated and still follow each role’s concise output format.
+### If Sub-Agents Not Available
+Simulate delegation:
+- Write the HANDOFF packet
+- Respond in labeled sections: `[ANALYZER MODE]`, `[PLANNER MODE]`, etc.
+- Keep outputs separated, follow each role's concise format
 
 ---
 
-## Appendices (optional full templates)
-
-These are **only** used when the human asks for a full report.
+## Appendices (Full Templates — use only when requested)
 
 ### Appendix A — Full Analysis Report
 - Architecture map (modules + responsibilities + owners)
 - Dependency graph + cycles
 - Boundary violations (with `file:line`)
-- “Black box” compliance scorecard
+- Black-box compliance scorecard
 - Top 5 refactor opportunities (ranked by ROI)
 - Suggested roadmap + risks
 
@@ -200,7 +248,7 @@ These are **only** used when the human asks for a full report.
 - Exact diffs by file
 - Tests added/updated
 - Verification commands
-- Rollback plan (if applicable)
+- Rollback plan
 
 ### Appendix D — Full Debug Report
 - Repro steps + minimal repro artifact

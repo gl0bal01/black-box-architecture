@@ -1,7 +1,7 @@
 {
   "name": "black-box-architecture-agents",
-  "version": "1.1.0",
-  "description": "Specialized agents for autonomous architectural. Coordinated agent system for analysis, planning, implementation, and debugging.",
+  "version": "2.0.0",
+  "description": "Specialized agents for autonomous architectural work. Coordinated system for analysis, planning, implementation, and debugging with self-improvement loop and approval gates.",
   "author": "gl0bal01",
   "license": "MIT",
   "keywords": [
@@ -12,137 +12,120 @@
     "autonomous",
     "refactoring",
     "code-analysis",
-    "debugging"
+    "debugging",
+    "self-improvement"
+  ],
+  "changes_v2": [
+    "Added self-improvement loop (tasks/lessons.md) — agents learn from corrections",
+    "Added task tracking (tasks/todo.md) — persistent progress across sessions",
+    "Added commit checkpoints before non-trivial changes — rollback safety",
+    "Hardened approval gates — explicit ⛔ stops for deps/API/schema/deletions",
+    "Added elegance check in planner and implementer",
+    "Added autonomous bug fixing mode in debugger",
+    "Added plan mode trigger for 3+ step tasks",
+    "Added session start checklist to all agents",
+    "Evidence minimums enforced: ≥3 file:line per architectural claim",
+    "LESSONS RELEVANT field added to HANDOFF packet"
   ],
   "agents": {
     "orchestrator": {
       "name": "Architecture Orchestrator",
-      "description": "Meta-agent that coordinates specialized architectural agents to handle complex workflows",
+      "description": "Entry point for all architectural tasks. Classifies, delegates, enforces approval gates.",
       "file": "arch-orchestrator.md",
       "role": "coordination",
-      "delegates": [
-        "analyzer",
-        "planner",
-        "implementer",
-        "debugger"
-      ],
-      "skills_used": [],
+      "model": "opus",
+      "delegates": ["analyzer", "planner", "implementer", "debugger"],
       "policy": {
         "can_modify_code": false,
         "can_delegate": true,
         "owns_approval_gates": true,
-        "use_subagents_when": [
-          "analysis",
-          "planning",
-          "debugging",
-          "multi-module refactors"
-        ]
+        "plan_mode_trigger": "5+ steps or architectural decision"
       }
     },
     "analyzer": {
       "name": "Architecture Analyzer",
-      "description": "Autonomously explores codebases to identify architectural issues and module boundaries",
+      "description": "Maps module boundaries, coupling, and black-box violations. Read-only.",
       "file": "arch-analyzer.md",
       "role": "analysis",
-      "delegates": [],
-      "skills_used": [
-        "refactor",
-        "debug"
-      ],
+      "model": "sonnet",
       "policy": {
         "can_modify_code": false,
-        "can_delegate": false
+        "can_delegate": false,
+        "evidence_minimum": "3 file:line per finding"
       }
     },
     "planner": {
       "name": "Architecture Planner",
-      "description": "Designs black box architectures and creates strategic implementation roadmaps",
+      "description": "Designs black-box boundaries and phased implementation roadmaps. Read-only.",
       "file": "arch-planner.md",
       "role": "design",
-      "delegates": [],
-      "skills_used": [
-        "plan"
-      ],
+      "model": "opus",
       "policy": {
         "can_modify_code": false,
-        "can_delegate": false
+        "can_delegate": false,
+        "writes_to": "tasks/todo.md"
       }
     },
     "implementer": {
       "name": "Architecture Implementer",
-      "description": "Executes approved architectural plans by refactoring code to follow black box principles",
+      "description": "Executes approved plans with commit checkpoints and scope discipline.",
       "file": "arch-implementer.md",
       "role": "implementation",
-      "delegates": [],
-      "skills_used": [
-        "refactor"
-      ],
+      "model": "sonnet",
       "policy": {
         "can_modify_code": true,
         "can_delegate": false,
-        "requires_approval_for": [
-          "deps",
-          "public_api",
-          "schema",
-          "deletions"
-        ]
+        "requires_approval_for": ["deps", "public_api", "schema", "deletions", "permission_widening"],
+        "commit_checkpoint": "required before non-trivial changes",
+        "writes_to": ["tasks/todo.md", "tasks/lessons.md"]
       }
     },
     "debugger": {
       "name": "Architecture Debugger",
-      "description": "Debugs modular systems by isolating bugs to specific black boxes and maintaining boundaries",
+      "description": "Isolates bugs to contract boundaries, fixes autonomously, captures lessons.",
       "file": "arch-debugger.md",
       "role": "debugging",
-      "delegates": [],
-      "skills_used": [
-        "debug"
-      ],
+      "model": "sonnet",
       "policy": {
-        "can_modify_code": false,
+        "can_modify_code": true,
         "can_delegate": false,
-        "may_request_agent": "implementer"
+        "may_request_agent": "implementer",
+        "autonomous_mode": true,
+        "writes_to": "tasks/lessons.md"
       }
     }
   },
   "workflows": {
     "analysis_only": {
-      "description": "Analyze codebase architecture without making changes",
-      "agents": [
-        "analyzer"
-      ]
+      "description": "Analyze codebase architecture without changes",
+      "agents": ["analyzer"]
     },
     "planning_only": {
-      "description": "Design architecture for a new feature or system",
-      "agents": [
-        "planner"
-      ]
+      "description": "Design architecture for new feature or system",
+      "agents": ["planner"],
+      "outputs": ["tasks/todo.md"]
     },
     "full_refactoring": {
-      "description": "Complete architectural transformation: analyze → design → implement",
-      "agents": [
-        "analyzer",
-        "planner",
-        "implementer"
-      ],
-      "requires_approval": true
+      "description": "Analyze → design → implement with approval gate",
+      "agents": ["analyzer", "planner", "implementer"],
+      "requires_approval": true,
+      "approval_gate": "after planner, before implementer"
     },
     "debug_and_fix": {
-      "description": "Debug modular system and implement fix",
-      "agents": [
-        "debugger",
-        "implementer"
-      ]
+      "description": "Debug and fix with lesson capture",
+      "agents": ["debugger", "implementer"],
+      "outputs": ["tasks/lessons.md"]
     },
     "complete_transformation": {
-      "description": "Comprehensive architectural overhaul with validation",
-      "agents": [
-        "analyzer",
-        "planner",
-        "implementer",
-        "debugger"
-      ],
+      "description": "Full architectural overhaul with validation",
+      "agents": ["analyzer", "planner", "implementer", "debugger"],
       "requires_approval": true
     }
+  },
+  "files": {
+    "contract": "AGENTS_CONTRACT.md",
+    "lessons": "tasks/lessons.md",
+    "todo": "tasks/todo.md"
   },
   "architecture": {
     "pattern": "black-box-modular",
@@ -168,13 +151,5 @@
   },
   "repository": "https://github.com/gl0bal01/black-box-architecture",
   "homepage": "https://github.com/gl0bal01/black-box-architecture#readme",
-  "bugs": "https://github.com/gl0bal01/black-box-architecture/issues",
-  "contract": {
-    "file": "AGENTS_CONTRACT.md",
-    "schema_version": "1",
-    "defaults": {
-      "communication": "concise",
-      "use_file_line_evidence": true
-    }
-  }
+  "bugs": "https://github.com/gl0bal01/black-box-architecture/issues"
 }
