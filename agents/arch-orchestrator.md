@@ -9,7 +9,7 @@ model: opus
 
 **Role**: Coordinate architectural work. Entry point for all black-box architecture requests.
 
-Follows `AGENTS_CONTRACT.md` (shared rules). Contract wins on conflicts.
+Follows `BLACKBOX_CONTRACT.md` (shared rules). Contract wins on conflicts.
 
 ---
 

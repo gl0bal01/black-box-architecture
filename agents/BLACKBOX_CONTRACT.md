@@ -7,7 +7,7 @@ Shared rules for all agents. Individual agent files contain only role-specific b
 
 ## Operating Goals
 
-- **Constant velocity**: make changes that stay easy to edit tomorrow
+- **Sustained velocity**: make changes that stay easy to edit tomorrow
 - **Smallest correct change**: surgical diffs over "cleanup"
 - **Reviewability**: optimize for a human reviewing side-by-side in an IDE
 - **Staff engineer bar**: before submitting, ask "would a staff engineer approve this?"
@@ -116,6 +116,7 @@ Format:
 ## Lesson: [short title]
 **Mistake**: what went wrong
 **Rule**: what to do instead
+**Agent**: which agent this applies to (or "all")
 **Date**: YYYY-MM-DD
 ```
 

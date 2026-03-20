@@ -70,9 +70,6 @@ cp -r agents/* .claude/agents/
 - Include specific examples
 - Maintain consistency with existing style
 
-### For Legacy Prompts
-- If you update `docs/legacy/skills/` or `docs/legacy/commands/`, keep them aligned with `agents/AGENTS_CONTRACT.md`
-
 ### For Documentation
 - Use clear, concise language
 - Include code examples

@@ -1,7 +1,7 @@
 {
   "name": "black-box-architecture-agents",
-  "version": "2.0.0",
-  "description": "Specialized agents for autonomous architectural work. Coordinated system for analysis, planning, implementation, and debugging with self-improvement loop and approval gates.",
+  "version": "2.0.2",
+  "description": "Specialized agents for architectural work with human-in-the-loop approval gates. Coordinated system for analysis, planning, implementation, and debugging with self-improvement loop.",
   "author": "gl0bal01",
   "license": "MIT",
   "keywords": [
@@ -68,7 +68,7 @@
     },
     "implementer": {
       "name": "Architecture Implementer",
-      "description": "Executes approved plans with commit checkpoints and scope discipline.",
+      "description": "Primary agent for planned code changes. Executes approved plans with commit checkpoints and scope discipline.",
       "file": "arch-implementer.md",
       "role": "implementation",
       "model": "sonnet",
@@ -90,7 +90,7 @@
         "can_modify_code": true,
         "can_delegate": false,
         "may_request_agent": "implementer",
-        "autonomous_mode": true,
+        "autonomous_mode": "internal module logic only; approval gates still apply",
         "writes_to": "tasks/lessons.md"
       }
     }
@@ -123,7 +123,7 @@
     }
   },
   "files": {
-    "contract": "AGENTS_CONTRACT.md",
+    "contract": "BLACKBOX_CONTRACT.md",
     "lessons": "tasks/lessons.md",
     "todo": "tasks/todo.md"
   },

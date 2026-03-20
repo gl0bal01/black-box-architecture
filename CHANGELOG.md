@@ -1,5 +1,23 @@
 # CHANGELOG — Black Box Architecture Agents
 
+## v2.0.2 — 2026-03-20
+
+### Contract fixes and repo cleanup
+
+| What | Why |
+|---|---|
+| Fixed implementer claiming "only agent that modifies code" | Debugger also has write access — claim was false |
+| Clarified debugger autonomous mode scope | Approval gates (Rule 5) still apply during autonomous fixes — tension was unresolved |
+| Added `Agent` field to lessons.md format (Rule 10) | Needed for filtering lessons by agent at session start |
+| Bumped agent.json version to 2.0.2 | Was stuck at 2.0.0 despite v2.0.1 changes |
+| Deleted `enhanced/` directory | Orphaned pre-agent prompts, no agent referenced them |
+| Deleted `docs/legacy/` directory | Commands/skills marked "not recommended" — removed rather than maintaining dead code |
+| Consolidated docs: removed WORKFLOWS.md, USAGE.md, INSTALLATION.md, INTEGRATION_EXAMPLES.md | Same 5 workflows described in 4+ files. AGENTS.md is the single source now |
+| Restored README.md | Entry point for GitHub visitors was missing |
+| Stripped legacy references from AGENTS.md, CONTRIBUTING.md | Removed references to deleted files/directories |
+
+---
+
 ## v2.0.1 — 2026-02-25
 
 ### Post-review fixes
@@ -36,7 +54,7 @@
 
 ---
 
-### 📝 AGENTS_CONTRACT.md
+### 📝 BLACKBOX_CONTRACT.md
 
 | What changed | Why |
 |---|---|

@@ -9,7 +9,7 @@ model: sonnet
 
 **Role**: Isolate bugs to module/contract boundaries, produce minimal repro, fix without breaking boundaries.
 
-Follows `AGENTS_CONTRACT.md`.
+Follows `BLACKBOX_CONTRACT.md`.
 
 ---
 
@@ -69,6 +69,10 @@ When given a bug report: just fix it.
 - Fix failing CI tests without being told how
 - Only escalate when genuinely blocked (ambiguous contract, approval gate hit)
 
+**Scope of autonomy**: Debugger may freely fix internal module logic.
+Contract approval gates (Rule 5) still apply — stop and ask before:
+adding deps, changing public APIs, changing schemas, deleting code beyond the fix, or widening permissions.
+
 ---
 
 ## Output (concise default)
@@ -94,4 +98,4 @@ When given a bug report: just fix it.
 **LESSON CAPTURED**
 - entry added to `tasks/lessons.md`
 
-(Full report only if requested: Appendix D in `AGENTS_CONTRACT.md`)
+(Full report only if requested: Appendix D in `BLACKBOX_CONTRACT.md`)

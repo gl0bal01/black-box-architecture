@@ -4,7 +4,7 @@ This file is reviewed at the start of each session by all agents.
 Updated after any correction from the user.
 
 **Format:**
-```
+```markdown
 ## Lesson: [short title]
 **Mistake**: what went wrong
 **Rule**: what to do instead

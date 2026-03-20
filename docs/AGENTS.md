@@ -1,6 +1,6 @@
 # Black Box Architecture - Agent System Guide
 
-Complete guide to using the autonomous agent system for complex architectural work.
+Complete guide to using the agent system for architectural work.
 
 ## Table of Contents
 
@@ -14,36 +14,9 @@ Complete guide to using the autonomous agent system for complex architectural wo
 
 ## Overview
 
-The Black Box Architecture agent system provides **autonomous specialists** that handle complex, multi-step architectural tasks without constant guidance.
+The Black Box Architecture agent system provides **specialists** that handle multi-step architectural tasks with human approval at key checkpoints.
 
-Agents follow a shared contract: `agents/AGENTS_CONTRACT.md`.
-Legacy prompts (`docs/legacy/skills/` and `docs/legacy/commands/`) are kept for compatibility but are not recommended for daily use.
-
-### When to Use Agents vs Commands vs Skills (Legacy)
-
-| Feature | Commands | Skills | Agents |
-|---------|----------|--------|--------|
-| **Trigger** | Manual (/command) | Auto-discovered | Delegated by orchestrator |
-| **Autonomy** | Template execution | Knowledge reference | Multi-step reasoning |
-| **Context** | Shared with main conversation | Shared with main conversation | Separate context window |
-| **Best For** | Quick workflows | Packaged expertise | Complex tasks requiring decision-making |
-| **Complexity** | Low | Medium | High |
-
-**Use agents when:**
-- Task requires multiple steps with autonomous decision-making
-- Need to coordinate across multiple specializations (analysis → design → implementation)
-- Want to prevent context pollution in main conversation
-- Complex workflow with checkpoints and approvals
-
-**Use commands when (legacy):**
-- Simple, straightforward workflow
-- User wants direct control over each step
-- Quick template-based responses
-
-**Use skills when (legacy):**
-- Providing reusable expertise that should be auto-discovered
-- Building knowledge modules agents can leverage
-- Creating packaged capabilities
+Agents follow a shared contract: `agents/BLACKBOX_CONTRACT.md`.
 
 ## Installation
 
@@ -105,7 +78,7 @@ The agent system follows black box principles itself:
          │         │           │           │
          ▼         ▼           ▼           ▼
     ┌────────────────────────────────────────┐
-    │        Shared Contract (AGENTS_CONTRACT.md)       │
+    │        Shared Contract (BLACKBOX_CONTRACT.md)       │
     │  • scope • evidence • approvals • verification    │
     └────────────────────────────────────────┘
 ```
@@ -127,11 +100,6 @@ The agent system follows black box principles itself:
 - Prevents context pollution
 - Maintains focus on specific task
 
-**4. Legacy Prompts (Optional)**
-- Skills/commands can be used for compatibility
-- Agents do not require them for daily use
-- Keep legacy prompts aligned with the shared contract if used
-
 ## Individual Agents
 
 ### arch-orchestrator
@@ -145,8 +113,6 @@ The agent system follows black box principles itself:
 **Output**: Coordinated result from appropriate specialists
 
 **Delegates To**: All other agents
-
-**Legacy Prompts**: None (coordinates others)
 
 **When to Use Directly**: When you have a complex request requiring multiple agents
 
@@ -177,8 +143,6 @@ and implement them following black box principles"
 **Output**: Comprehensive analysis with violations and recommendations
 
 **Delegates To**: None (leaf agent)
-
-**Legacy Prompts**: Optional (refactor/debug)
 
 **When to Use Directly**: When you only want analysis, no changes
 
@@ -215,8 +179,6 @@ and implement them following black box principles"
 **Output**: Complete architecture design with roadmap and risks
 
 **Delegates To**: None (leaf agent)
-
-**Legacy Prompts**: Optional (plan)
 
 **When to Use Directly**: When designing new features or systems from scratch
 
@@ -258,8 +220,6 @@ that needs to scale to 1M users"
 
 **Delegates To**: None (does the implementation work)
 
-**Legacy Prompts**: Optional (refactor)
-
 **When to Use Directly**: When you have an approved plan ready to implement
 
 **Example Request**:
@@ -300,8 +260,6 @@ that needs to scale to 1M users"
 **Output**: Root cause analysis, proposed fix, verification plan
 
 **Delegates To**: May suggest arch-implementer for complex fixes
-
-**Legacy Prompts**: Optional (debug)
 
 **When to Use Directly**: When debugging issues in modular systems
 
@@ -488,14 +446,6 @@ For implementation, focus incrementally:
 ❌ "Implement all 15 modules at once"
 ```
 
-### 6. Leverage Legacy Prompts (Optional)
-
-Legacy prompts can be used directly if you need them:
-
-```
-Use refactor.md / plan.md / debug.md directly if you prefer
-```
-
 ## Troubleshooting
 
 ### Agent Not Found
@@ -533,11 +483,11 @@ cp -r black-box-architecture/agents/* .claude/agents/
 
 **Problem**: Want to control each step
 
-**Solution**: Use legacy commands instead of agents
-```bash
-/arch          # More control than orchestrator
-/arch-plan     # More control than planner
-/arch-debug    # More control than debugger
+**Solution**: Invoke individual agents directly instead of using the orchestrator:
+```
+"Ask arch-analyzer to analyze src/services/"
+"Ask arch-planner to design a payment module"
+"Ask arch-implementer to execute the approved plan"
 ```
 
 ## Advanced Usage
@@ -579,11 +529,8 @@ Agents can be part of automated workflows:
 
 ## FAQ
 
-**Q: Can I use agents without skills?**
-A: Yes. Agents do not require skills; skills are legacy prompts.
-
 **Q: Do agents modify code automatically?**
-A: Only arch-implementer modifies code, and only after explicit approval.
+A: arch-implementer and arch-debugger can modify code. Implementer requires prior approval; debugger can fix autonomously but still respects approval gates for deps/API/schema changes.
 
 **Q: Can agents work on any language?**
 A: Yes - Python, TypeScript, Go, Rust, C, PHP, Java, and more.
@@ -608,9 +555,10 @@ A: No - they work offline with your local codebase.
 ## Resources
 
 - [Agent Specifications](../agents/agent.json) - Technical details
-- [Individual Agent Files](../agents/) - Full agent implementations
-- [Skills Documentation](../docs/legacy/skills/) - Legacy knowledge modules (optional)
-- [Examples](../examples/) - Real-world refactorings
+- [Individual Agent Files](../agents/) - Full agent specs
+- [Principles](PRINCIPLES.md) - Black box design philosophy
+- [Code Examples](EXAMPLES.md) - Before/after refactorings
+- [Runnable Examples](../examples/) - Multi-language examples
 
 ---
 

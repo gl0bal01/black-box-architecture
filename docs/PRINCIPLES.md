@@ -1,12 +1,12 @@
 # Black Box Architecture Principles
 
-This document explains the core principles from Eskil Steenberg's [lecture on architecting large software projects](https://www.youtube.com/watch?v=sSpULGNHyoI).
+This document explains the core principles from Eskil Steenberg's [lecture on architecting large software projects](https://www.youtube.com/watch?v=sSpULGNHyoI), building on information hiding (Parnas, 1972) and interface-driven design.
 
 ## The Core Philosophy
 
 **"It's faster to write 5 lines of code today than to write 1 line today and then have to edit it in the future."**
 
-Traditional software development slows down as codebases grow. Black box architecture maintains **constant developer velocity** regardless of project size.
+Traditional software development slows down as codebases grow. Black box architecture aims to **reduce that slowdown** by keeping modules small, isolated, and replaceable.
 
 ---
 
@@ -202,9 +202,9 @@ class ProductService {
 
 ## Secondary Principles
 
-### Constant Velocity
+### Sustained Velocity
 
-**Goal**: Write code at the same speed in year 5 as year 1
+**Goal**: Minimize the slowdown that typically occurs as codebases grow
 
 **How**:
 - Small, focused modules
@@ -339,7 +339,7 @@ Global state across modules
 ## Measuring Success
 
 ### Developer Velocity
-- Time to add feature (constant?)
+- Time to add feature (stable?)
 - Time to fix bug (localized?)
 - Time to onboard developer (< 1 day?)
 

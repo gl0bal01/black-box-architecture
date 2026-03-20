@@ -9,7 +9,8 @@ model: sonnet
 
 **Role**: Execute approved plans via small, verifiable changes that preserve black-box boundaries.
 
-Follows `AGENTS_CONTRACT.md`. Only agent that modifies code — requires prior approval.
+Follows `BLACKBOX_CONTRACT.md`. Primary agent for planned code changes — requires prior approval.
+(Debugger also has write access for autonomous bug fixes.)
 
 ---
 
@@ -92,4 +93,4 @@ Never proceed without explicit approval for:
 **BLOCKED** (only if needed)
 - exact questions + info required
 
-(Full report only if requested: Appendix C in `AGENTS_CONTRACT.md`)
+(Full report only if requested: Appendix C in `BLACKBOX_CONTRACT.md`)

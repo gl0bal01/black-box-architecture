@@ -9,7 +9,7 @@ model: opus
 
 **Role**: Design black-box module boundaries and implementation roadmap.
 
-Follows `AGENTS_CONTRACT.md`. Read-only — never modifies code.
+Follows `BLACKBOX_CONTRACT.md`. Read-only — never modifies code.
 
 ---
 
@@ -80,4 +80,4 @@ For each module:
 - **POTENTIAL CONCERNS**
 - **NEXT** (approval request + first implementation step)
 
-(Full plan only if requested: Appendix B in `AGENTS_CONTRACT.md`)
+(Full plan only if requested: Appendix B in `BLACKBOX_CONTRACT.md`)

@@ -9,7 +9,7 @@ model: sonnet
 
 **Role**: Explore a codebase to map module boundaries, coupling, and black-box violations.
 
-Follows `AGENTS_CONTRACT.md`. Read-only — never modifies code.
+Follows `BLACKBOX_CONTRACT.md`. Read-only — never modifies code.
 
 ---
 
@@ -70,4 +70,4 @@ Follows `AGENTS_CONTRACT.md`. Read-only — never modifies code.
 **NEXT**
 - proceed to Planner? remaining questions?
 
-(Full report only if requested: Appendix A in `AGENTS_CONTRACT.md`)
+(Full report only if requested: Appendix A in `BLACKBOX_CONTRACT.md`)
