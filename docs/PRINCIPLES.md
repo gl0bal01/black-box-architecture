@@ -360,7 +360,7 @@ Global state across modules
 
 - **Watch**: [Eskil Steenberg's Full Lecture](https://www.youtube.com/watch?v=sSpULGNHyoI) (1 hour)
 - **Read**: This repository's [examples](EXAMPLES.md)
-- **Practice**: Use the prompts in [usage guide](USAGE.md)
+- **Practice**: Apply the patterns to a module in your own project
 
 ---
 
